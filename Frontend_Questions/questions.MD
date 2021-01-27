@@ -121,10 +121,18 @@ value - значение параметра <br>
 
 Если указан property position, то дополнительно можно указать properties: left, right, top, bottom (Сдвигать тэг влево, вправо, вверх, вниз). 
 
-
+Flex объекты: <br>
 * display: flex, display: block (элемент становиться флексом. Все элементы внутри флекса становяться его элементами и происходит автоматическая рассатовка элементов внутри флекса). 
-
-
+* flex-direction: row, row-reverse, column, column-reverse
+* flex-wrap: nowrap, wrap, wrap-reverse; (задается правило вывода flex-элементов, wrap - перенос элементов на след. строку, столбец). 
+* flex-flow: (сокращенное название для flex-direction, flex-wrap). 
+* order: (shows display order of items)
+* flex-grow: 1,2,3 (позволяет указывать относительные размеры элементов флекса). 
+* flex-shrink: (сжатие элементов если не хватает место в строке, используется вместо flex-wrap если не хотим переносить на след. строку. )
+* flex-basis: (определяет минимальный размер элемента флекса). 
+* justify-content: flex-start, flex-end, center, space-between, space-around (аналог flex-grow, flex-shrink, позволяет изменять расположение вдоль главной оси). 
+* align-items: aligns item among cross-axis (изменение расположение относительно второстепенной оси). 
+* align-content - сдвиг элементов вдоль второстепенной оси. 
 
 
 
