@@ -134,6 +134,22 @@ Flex объекты: <br>
 * align-items: aligns item among cross-axis (изменение расположение относительно второстепенной оси). 
 * align-content - сдвиг элементов вдоль второстепенной оси. 
 
+<h2>HTML Forms</h2>
+у тэга form 2 атрибута: action (указывается адрес где будет процессинг формы), method (get, post etc).
+
+Пример:
+    
+    <!DOCTYPE html>
+    <html>
+      <head>
+        <title>HTML Forms</title>
+      </head>
+      <body>
+        <form action="[value]" method="post">
+           Input elements
+        </form>
+      </body>
+    </html>
 
 
 
