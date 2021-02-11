@@ -1,9 +1,12 @@
 # Interview_Questions
 
-This is repo where most common questions are asked: <br>
+This is repo where most common questions are asked and answered: <br>
 
 Question topic:
-* Java;
-* SQL; 
 * Core Programming;
+* Java;
+* Python;
+* Big Data Technologies; 
+* SQL; 
+* Frontend; 
 * etc
