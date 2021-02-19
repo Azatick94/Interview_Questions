@@ -904,7 +904,8 @@ JSTL - Java Server Tag Library.
 <h1>*** SPRING, SPRING BOOT, SPRING CORE, SPRING MVC, SPRING JPA и т.д. </h1>
 <a href="https://habr.com/ru/post/350682/">1) Common questions</a><br>
 <a href="https://habr.com/ru/post/490586/">2) Хорошая статья для начинающих</a><br>
-<a href="https://spring.io/">3) Официальная станица spring.io</a>
+<a href="https://spring.io/">3) Официальная станица spring.io</a><br>
+<a href="https://habr.com/ru/post/222579/">3) Про способы конфигурирования Spring приложения.</a>
 
 ---
 <h2>* Что такое REST API</h2>
