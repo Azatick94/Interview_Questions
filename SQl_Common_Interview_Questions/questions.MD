@@ -289,13 +289,21 @@ LEFT JOIN ON employee mgr ON emp.manager_id=mgr.employee_id; <br>
 
 ---
 <h2>* Индексы в SQL. Зачем и где используются?</h2>
+
+Ссылки:<br>
+<a href="https://ru.wikipedia.org/wiki/%D0%98%D0%BD%D0%B4%D0%B5%D0%BA%D1%81_(%D0%B1%D0%B0%D0%B7%D1%8B_%D0%B4%D0%B0%D0%BD%D0%BD%D1%8B%D1%85)">1) Вики</a><br>
+<a href="https://postgrespro.ru/docs/postgresql/10/indexes-intro">2) Ссылка 2</a><br>
+<a href="http://postgresguide.com/performance/indexes.html"><a>3) Ссылка 3</a><br>
+<a href="https://postgrespro.ru/docs/postgresql/9.6/indexes.html">4) Postgres docs</a>
+
+
 Индексы позволяют достигать большой скорости производительности SQL запросов. <br>
 Индекс ускоряет процесс запроса, предоставляя быстрый доступ к строкам данных в таблице, аналогично тому, как указатель в книге помогает вам быстро найти необходимую информацию. 
 <br>
 Индекс состоит из набора страниц, узлов индекса, которые организованы в виде древовидной структуры - сбалансированного дерева. 
 <br>
 
-Преимущество индексов: 
+<b>Преимущество индексов:</b> 
 * Индексы сокращают время поиска в абсолютном выражении. 
 * Индексы уменьшают алгоритмическую сложность процесса поиска. 
 
@@ -305,6 +313,15 @@ LEFT JOIN ON employee mgr ON emp.manager_id=mgr.employee_id; <br>
 * Функциональный индекс (индекс по выражению) - индексация по результатам вычислений. 
 * Кластеризованный индекс;
 * Некластеризованный индекс;
+
+ПРИМЕР создания индекса:<br>
+
+    CREATE INDEX idx_salary ON employees(salary);
+
+или составной индекс:
+
+    CREATE INDEX idx_salary ON employees(last_name, salary);
+
 
 ---
 <h2>* Использование в запросе нескольких источников записей</h2>
@@ -337,7 +354,7 @@ ACID - атомарность Atomicity, согласованность (Consist
       SELECT * FROM ViewName;
 
 
-<h2>Materialized Views</h2>
+<h2>* Materialized Views</h2>
 Материализованные Виды. <br>
 Это физический объект данных, содержащий результат выполнения запроса. В материализованном представлении уже заранее хранятся вычисленные результаты запроса. 
 Поэтому запрос выполняется намного быстрее. 
@@ -397,14 +414,43 @@ ACID - атомарность Atomicity, согласованность (Consist
 * YEAR(дата) - получить год даты. 
 * MONTHNAME(дата) - получить название месяца на английском языке. 
 
+---
+<h2>* Оптимизация запросов. </h2>
 
+<a href="https://habr.com/ru/post/203320/">1) Ссылка 1</a><br>
+<a href="https://habr.com/ru/post/203386/">2) Ссылка 2</a><br>
+<a href="https://habr.com/ru/post/203484/">3) Ссылка 3</a><br>
 
+---
+<h2>* SEQUENCE В SQL </h2>
+SEQUENCE - это объект последовательность, которая генерирует числовые значения в определенной последовательности в соответствии с заданной спецификацией. 
 
+Синтаксис SEQUENCE
+        
+        CREATE SEQUENCE [schema_name].[sequence_name]
+        [ AS [data type] ]
+        [ START WITH < value > ]
+        [ INCREMENT BY < value > ]
+        [ MINVALUE [ < value > ] | NO MINVALUE ]
+        [ MAXVALUE [ < value > ] | NO MAXVALUE ]
+        [ CYCLE | NO CYCLE ]
+        [ CACHE [ < value >] | NO CACHE ];
 
+Примеры создания Sequence: <br>
 
+* Создание Sequence c начальным значением 10 и увеличением на 5ж 
 
+        CREATE SEQUENCE TestSequence
+        START WITH 10
+        INCREMENT BY 5;
 
+* Создание SEQUENCE с заданным типом данных
 
+        CREATE SEQUENCE TestSequence
+        AS TINYINT
+        START WITH 1
+        INCREMENT BY 1;
 
-
-
+Псевдостолбы NEXTVAL и CURRVAL: <br>
+* NEXTVAL возвращает следующее доступное значение последовательности. Оно возвращает уникальное значение каждый раз, когда на него ссылаются, даже для различных пользователей.
+* CURRVAL получает текущее значение последовательности.
