@@ -3,12 +3,12 @@
 This is repo where most common questions are asked and answered: <br>
 
 <h3>Question topic: </h3>
-* Core Programming;
-* Java;
-* Python;
-* Big Data Technologies; 
-* SQL; 
-* Frontend; 
+* Core Programming; <br>
+* Java; <br>
+* Python; <br>
+* Big Data Technologies; <br>
+* SQL; <br>
+* Frontend; <br> 
 * etc
 
 <h3>Additional Resources: </h3>
