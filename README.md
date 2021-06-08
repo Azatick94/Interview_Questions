@@ -2,7 +2,7 @@
 
 This is repo where most common questions are asked and answered: <br>
 
-<h3>Question topic: </h3>
+<h3>Covered topics: </h3>
 * Core Programming; <br>
 * Java; <br>
 * Python; <br>
