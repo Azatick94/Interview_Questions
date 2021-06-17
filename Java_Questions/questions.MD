@@ -46,6 +46,42 @@
 <br>* UDDI – универсальный источник распознавания, интеграции и описания. Работает, как правило, в частных сетях и пока
 не нашел достаточного распространения.
 
+---
+<h2>*** Что такое Docker?</h2>
+Полезные ресурсы:<br>
+* https://docs.docker.com/get-docker/
+* https://www.youtube.com/watch?v=FlSup_eelYE
+* https://www.youtube.com/watch?v=3c-iBn73dDE&t=4364s
+
+container - running environment of an image. 
+
+<b>Команды:</b>
+### Создание Docker Image
+* docker build -t test-app . - создание Docker-Image используя команды из DockerFile
+* docker build -f Dockerfile -t test-app . - создание Docker-Image с указанием названия Dockerfile
+
+### Основные команды для запуска/остановки контейнеров
+* docker pull redis - скачать redis image из публичного репозитория Docker-Hub. 
+
+* docker run redis (docker pull+start) - запуск redis-контейнера 
+* docker run -d redis - запуск redis-контейнера в detached режиме 
+* docker run -p6000:6379 redis - запуск redis-контейнера в указанием портов, 6000-порт нашей машины, 6379-порт контейнера, то есть порт 6000 нашего хоста будет слушать порт 6370 redis-контейнера.
+* docker run --name my_container redis - запуск redis-контейнера с именем "my_container"
+  
+* docker images - показать список всех images
+* docker ps - показать список работающих контейнеров
+* docker ps -a - показать список работающих/остановленных контейнеров
+  
+* docker stop ff7b935a34ad - остановить работу койтейнера с id = ff7b935a34ad
+* docker start ff7b935a34ad - запустить койтейнер с id = ff7b935a34ad
+
+### troubleshooting
+* docker logs ff7b935a34ad - показать историю логов контейнера с id = ff7b935a34ad
+* docker logs frosty_moser - показать историю логов контейнера с name = frosty_moser
+* docker logs -f ff7b935a34ad - показать логи контейнера с id = ff7b935a34ad и постоянно добавлять логи в конец 
+
+* docker exec -it ff7b935a34ad - зайти внутрь контейнера и посмотреть что там есть
+
 # <a name="core_java"></a>
 
 <h1>*** Core JAVA</h1>
