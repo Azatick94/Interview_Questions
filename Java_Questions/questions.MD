@@ -49,36 +49,42 @@
 ---
 <h2>*** Что такое Docker?</h2>
 Полезные ресурсы:<br>
+
 * https://docs.docker.com/get-docker/
 * https://www.youtube.com/watch?v=FlSup_eelYE
 * https://www.youtube.com/watch?v=3c-iBn73dDE&t=4364s
 
-container - running environment of an image. 
+container - running environment of an image.
 
 <b>Команды:</b>
+
 ### Создание Docker Image
+
 * docker build -t test-app . - создание Docker-Image используя команды из DockerFile
 * docker build -f Dockerfile -t test-app . - создание Docker-Image с указанием названия Dockerfile
 
 ### Основные команды для запуска/остановки контейнеров
-* docker pull redis - скачать redis image из публичного репозитория Docker-Hub. 
 
-* docker run redis (docker pull+start) - запуск redis-контейнера 
-* docker run -d redis - запуск redis-контейнера в detached режиме 
-* docker run -p6000:6379 redis - запуск redis-контейнера в указанием портов, 6000-порт нашей машины, 6379-порт контейнера, то есть порт 6000 нашего хоста будет слушать порт 6370 redis-контейнера.
+* docker pull redis - скачать redis image из публичного репозитория Docker-Hub.
+
+* docker run redis (docker pull+start) - запуск redis-контейнера
+* docker run -d redis - запуск redis-контейнера в detached режиме
+* docker run -p6000:6379 redis - запуск redis-контейнера в указанием портов, 6000-порт нашей машины, 6379-порт
+  контейнера, то есть порт 6000 нашего хоста будет слушать порт 6370 redis-контейнера.
 * docker run --name my_container redis - запуск redis-контейнера с именем "my_container"
-  
+
 * docker images - показать список всех images
 * docker ps - показать список работающих контейнеров
 * docker ps -a - показать список работающих/остановленных контейнеров
-  
+
 * docker stop ff7b935a34ad - остановить работу койтейнера с id = ff7b935a34ad
 * docker start ff7b935a34ad - запустить койтейнер с id = ff7b935a34ad
 
 ### troubleshooting
+
 * docker logs ff7b935a34ad - показать историю логов контейнера с id = ff7b935a34ad
 * docker logs frosty_moser - показать историю логов контейнера с name = frosty_moser
-* docker logs -f ff7b935a34ad - показать логи контейнера с id = ff7b935a34ad и постоянно добавлять логи в конец 
+* docker logs -f ff7b935a34ad - показать логи контейнера с id = ff7b935a34ad и постоянно добавлять логи в конец
 
 * docker exec -it ff7b935a34ad - зайти внутрь контейнера и посмотреть что там есть
 
@@ -165,7 +171,7 @@ container - running environment of an image.
 * Бинарные - иерархическая структура данных, в которой каждый узел имеет не более двух потомков (детей)
 * Красно-черные деревья (балансируют себя сами)
 * АВЛ-Дерево (AVL tree)
-* ДБ-Дерево 
+* ДБ-Дерево
 * Сплей-Дерево (Splay tree)
 
 ---
@@ -227,13 +233,15 @@ Quick sort Explained.
 
 ---
 <h2>* Структура данных - Графы. breadth-first search (BFS). Поиск в ширину.</h2>
+
 * https://en.wikipedia.org/wiki/Breadth-first_search
 
-Поиск в ширину позволяет найти ближайшее расстояние между двумя элементами. 
+Поиск в ширину позволяет найти ближайшее расстояние между двумя элементами.
 <br>
 Поиск в ширину отвечает на следующие вопросы:
+
 * Если ли путь от ноды A в ноду B
-* Какой самый быстрый путь от ноды А в ноду B. 
+* Какой самый быстрый путь от ноды А в ноду B.
 
 ---
 <h2>* CI/CD. Что это? Как работает?</h2>
@@ -1171,7 +1179,7 @@ Single Abstract Method) является функциональным интер
 
 Однако не все функции можно без ущерба для точности вычисления перенести с последовательных потоков на параллельные.
 Прежде всего такие функции должны быть без сохранения состояния и ассоциативными, то есть при выполнении слева направо
-давать тот же результат, что и при выполнении справа налево. 
+давать тот же результат, что и при выполнении справа налево.
 
 Параллельные стримы извнутри используют ForkJoinPool. ForkJoinPool - специальный вид ExecutorService (пулла потоков),
 предназначен для выполнения рекурсивных задач. <br>
@@ -2032,10 +2040,10 @@ Lazy Loading - это паттерн разработки, это процесс
 
 ---
 <h2>* Фреймворк Cucumber</h2>
+
 # TODO
+
 * https://cucumber.io/docs/guides/10-minute-tutorial/
-
-
 
 ---
 <h2>* JUnit Framework для тестирования. </h2>
@@ -2113,12 +2121,176 @@ Properties. Build. Profiles.
 ---
 <h2>* Паттерн Adapter</h2>
 
-# TODO
+* https://www.baeldung.com/java-adapter-pattern
+* https://javarush.ru/groups/posts/2139-pattern-proektirovanija-adapter
+
+Паттерн "Адаптер" связывает существующий класс с новый интерфейсом, чтобы он мог быть связан с интерфейсом клиента.
+Встроенные Адаптеры в Java:
+* java.util.Arrays#asList()
+* java.util.Collections#list()
+
+Пример: <br>
+"Предположим, что у нас есть приложение, который был создать для USA и суть программы в том, что он возвращает топ
+дорогих машин отсортированных по скорости. (Мили/час). Теперь мы хотим использовать это приложение в Великобритании. Но
+теперь нужно, чтобы приложение выводила результаты в единицах Км/час. Для выполнения этого условия необходимо
+использовать Паттерн Адаптер".
+<br>
+
+<b>Создадим Интерфейс Movable</b>
+
+    public interface Movable {
+    // returns speed in MPH
+    double getSpeed();
+    }
+
+<b>Теперь реализация этого Интерфейса</b>
+
+    public class BugattiVeyron implements Movable {
+        @Override
+        public double getSpeed() {
+            return 268;
+        }
+    }
+
+<b>Теперь создадим Интерфейс-Адаптера</b>
+    
+    public interface MovableAdapter {
+    // returns speed in KM/H
+    double getSpeed();
+    }
+
+<b>И теперь непосредственно реализация этого Интерфейса-Адаптера</b>
+
+    public class MovableAdapterImpl implements MovableAdapter {
+        // getting instance of Movable Interface Class 
+        private Movable luxuryCars;
+    
+        // standard constructors
+    
+        @Override
+        public double getSpeed() {
+            return convertMPHtoKMPH(luxuryCars.getSpeed());
+        }
+        
+        private double convertMPHtoKMPH(double mph) {
+            return mph * 1.60934;
+        }
+    }
+    
+<b>Результат Тестирования</b>
+
+    @Test
+    public void whenConvertingMPHToKMPH_thenSuccessfullyConverted() {
+    Movable bugattiVeyron = new BugattiVeyron();
+    MovableAdapter bugattiVeyronAdapter = new MovableAdapterImpl(bugattiVeyron);
+    
+        assertEquals(bugattiVeyronAdapter.getSpeed(), 431.30312, 0.00001);
+    }
+
 
 ---
 <h2>* Паттерн Decorator</h2>
 
-# TODO
+* https://pro-java.ru/patterny-proektirovaniya-java/realizaciya-patterna-dekorator-v-prostom-kode-java/ 
+
+Декоратор — это структурный паттерн, который позволяет добавлять объектам новые поведения на лету, помещая их в объекты-обёртки.
+
+Пример:<br>
+Будет пример POS-системы пиццерии. 
+
+<b>Создаем интерфейс Order.</b> 
+
+    public interface Order {
+    
+        public double getPrice();
+        public String getLabel();
+    
+    }
+
+
+<b>Класс Пицца, имплементирует Интерфейс Order. Это целевой объект для декорирования </b>
+
+    public class Pizza implements Order {
+    
+        private String label;
+        private double price;
+      
+        public Pizza(String label, double price) {
+    
+            this.label = label;
+            this.price = price;
+        }
+    
+        public double getPrice() {
+            return this.price;
+        }
+    
+        public String getLabel() {
+            return this.label;
+        }
+    
+    }
+
+<b>Теперь создадим объект класс Pizza </b>
+
+    Order fourSeasonsPizza = new Pizza("Четыре сезона", 10);
+
+
+<b>Теперь мы хотим добавить к пицце различные начинки. Для этого нужно будет использовать декоратор. Создадим Абстрактный класс Extra. </b>
+
+    public abstract class Extra implements Order {
+    
+        protected Order order;
+        protected String label;
+        protected double price;
+    
+        // All Args Construct
+    
+        public abstract double getPrice();
+        public String getLabel() { return order.getLabel() + ", " + this.label; }
+    }
+
+<b>И теперь классы, реализующие Абстрактный класс Extra. </b>
+
+    public class RegularExtra extends Extra {
+        public RegularExtra(String label, double price, Order order) {
+            super(label, price, order);
+        }
+        public Double getPrice() {
+            return this.price + order.getPrice();
+        }
+    }
+
+    public class NoCostExtra extends Extra {
+        public NoCostExtra(String label, double price, Order order) {
+            super(label, price, order);
+        }
+        public Double getPrice() {
+            return order.getPrice();
+        }
+    }
+
+    public class DoubleExtra extends Extra {
+        public DoubleExtra(String label, double price, Order order) {
+            super(label, price, order);
+        }
+        public Double getPrice() {
+            return (this.price * 2) + order.getPrice();
+        }
+        public String getLabel() {
+            return order.getLabel() + ", Double " + this.label;
+        }
+    }
+
+<b>А теперь можно протестировать.</b>
+
+    Order fourSeasonsPizza = new Pizza("Four Seasons Pizza", 10);
+    fourSeasonsPizza = new RegularExtra("Pepperoni", 4, fourSeasonsPizza);
+    fourSeasonsPizza = new DoubleExtra("Mozzarella", 2, fourSeasonsPizza);
+    fourSeasonsPizza = new NoCostExtra("Chili", 2, fourSeasonsPizza);
+    
+    System.out.println(fourSeasonsPizza.getPrice());
+    System.out.println(fourSeasonsPizza.getLabel());
 
 ---
 <h2>* Паттерн SOLID</h2>
