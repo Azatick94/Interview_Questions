@@ -2139,24 +2139,58 @@ BDD - это расширенная (дополненная) версия TDD м
 ---
 <h2>* Что такое Mock? Фреймворк Mockito? Особенности тестирования через Mock.</h2>
 
-* https://www.baeldung.com/mockito-annotations
-
 # TODO
+* https://www.baeldung.com/mockito-annotations
 
 ---
 <h2>* Фреймворк Cucumber</h2>
 
-# TODO
-
+* https://cucumber.io
 * https://cucumber.io/docs/guides/10-minute-tutorial/
 * https://github.com/Azatick94/Java_Learning/tree/main/Cucumber_Google_Search (Cucumber Project Example)
+* https://github.com/Azatick94/awesome-bdd-with-cucumber (Sample Cucumber Project Setup)
 
-Cucumber использует Gherkin как внутренний язык для написания тестов. <br>
-Ключевые слова в Gherkin:
+### Статья с примерами написания Gherkin Feature тестовых сценариев на русском языке.
 
-* Feature - здесь описываются сценарии.
-* Rule - представляет одно бизнес правило.
-* Steps - шаги (Given, When, Then, And, But)
+* https://habr.com/ru/post/332754/
+
+### Полезная серия из статей про Cucumber
+
+* https://medium.com/agile-vision/behavior-driven-development-bdd-software-testing-in-agile-environments-d5327c0f9e2d
+* https://medium.com/agile-vision/starting-with-bdd-for-collaborative-development-in-agile-environments-5fb034078b3c
+* https://medium.com/agile-vision/cucumber-bdd-part-2-creating-a-sample-java-project-with-cucumber-testng-and-maven-127a1053c180
+* https://github.com/ashenwgt/awesome-bdd-with-cucumber
+
+Cucumber - это BDD FrameWork, который использует легко-понятный для бизнеса язык Gherkin для написания тестовых
+сценариев.
+
+Тестовый сценарий выглядит следующим образом:
+
+    Feature: feature name
+    As a [role]
+    I want [feature]
+    So that [benefit/business reason]
+    
+    Scenario: title
+    Given context
+    When event
+    Then outcome
+    And/But more of the same ...
+    
+    Scenario Outline: title
+    Given .... <placeholder 1> .....
+    When .... <placeholder 2> ...
+    Then ... <placeholder 3> ...
+    
+    Examples:
+    | placeholder 1 | placeholder 2 | placeholder 3 |
+    |  value        |   value       |  value        |
+    |  value        |   value       |  value        |
+
+<b>Feature</b> - описывают функционал, который требует бизнес, здесь нужно указать наименование и кратко описать, что он
+должен выполнять. <br>
+<b>Scenario</b> - здесь описывается тестовый сценарий.  <br>
+<b>Examples</b> - примеры входных данных для тестирования. <br>
 
 ---
 <h2>* JUnit Framework для тестирования. </h2>
