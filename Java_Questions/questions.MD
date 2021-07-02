@@ -104,6 +104,8 @@ container - running environment of an image.
 * https://docs.spring.io/spring-amqp/docs/current/reference/html/ (Spring документация по протоколу AMQP)
 * https://github.com/Azatick94/Rabbit_Tutorial (тут ссылка на пример приложения с несколькими Queue, Entity и Bindings между ними)  
 
+* https://habr.com/ru/post/262069/ (Очень полезная ссылка с примерами RabbitMQ приложений, а также с деталями как деплоить в Heroku)
+
 
 
 Существуют 3 основных протоколов общения:
