@@ -1,5 +1,6 @@
 
-<h2>Common HTML Events</h2>
+---
+<h2>* Common HTML Events</h2>
 Here is a list of some common HTML events:
 * onchange	- An HTML element has been changed 
 * onclick -	The user clicks an HTML element 
@@ -39,4 +40,141 @@ DOM - document object model;
 * <b>document.querySelector("h1").classList.remove("huge")</b> - найти элемент с тэгом = h1 и удалить класс="huge". 
 
 * <b>document.querySelector("a").setAttribute("href", "https://www.bing.com")</b> - найти элемент с тэгом = a и изменить его атрибут href. 
+
+
+---
+<h2>JQuery? Что за фрейворк. </h2>
+
+
+Сравнение JQuery селектора с селектором на обычном JS:<br>
+
+// поиск тэга
+* document.querySelector("h1") - JS поиск h1 тэга
+* $("h1") - аналогичная операция с помощью JQuery
+ 
+
+// изменение стиля, добавление стиля
+* $("h1").addClass("big-title");
+
+// удаление стиля
+* $("h1").removeClass("big-title");
+
+// добавление нескольких стилей
+* $("h1").addClass("big-title margin-50");
+
+// проверка наличие класса у тэга
+* $("h1").hasClass("margin-50");
+
+// изменяет текст у всех тэгов h1
+* $("h1").text("Bye");
+
+// изменение html контента
+* $("h1").html("<em>Hey</em>");
+
+// получение атрибута тэга
+* $("img").attr("src"); 
+
+// изменение/сохранение атрибута тэга
+* $("img").attr("src", "https://www.yahoo.com")
+
+// добавление Событий/Events (при нажатии button, будет изменяться цвета всех h1 тэгов на фиолетовый)
+* $("button").click(function() {
+	$("h1").css("color", "purple")
+})
+
+// при нажатии кнопки, в консоли будет выводиться все то, что нажимается
+* $(document).keypress(function(event) {
+	console.log(event.key); 
+})
+
+// аналогичная выше операция реализованная другим способом
+* $(document).on("keypress", function(event) {
+	console.log(event.key); 
+})
+
+// добавление и удаление элементов из html
+* $("h1").before("<button>New</button>"); - добавить до указанного элемента
+* $("h1").after("<button>New</button>");  - добавить после указанного элемента
+* $("h1").prepend("<button>New</button>"); - добавить внутрь элемента вначало
+* $("h1").append("<button>New</button>"); - добавить внутрь элемента в конец
+* $("h1").remove(); - удаление всех элементов с тэгом h1
+
+
+// добавление анимаций: появление, исчезновение элементов. 
+* $("h1").hide(); - сокрытие элемента
+* $("h1").show(); - показать элемент
+* $("h1").fadeOut(); - скрыть элемент с анимацией
+* $("h1").fadeIn(); - показать элемент с анимацией
+* $("h1").fadeToggle(); - fadeOut+fadeIn
+* $("h1").slideUp(); - показать слайдом
+* $("h1").slideDown(); - скрыть слайдом
+* $("h1").slideToggle; - slideUp+slideDown
+
+* $("button").on("click", function() {
+	$("h1").slideUp().slideDown().animate({opacity: 0.5});
+})  - при нажатии выполняется последовательность операция slideUp + slideDown + изменение прозрачности
+
+---
+<h2>JQuery Ajax</h2>
+
+Ajax - Asunchronous JavaScript and XML. <br>
+
+* https://www.w3schools.com/jquERy/jquery_ajax_load.asp
+
+
+### 1) jQuery load() команда:<br>
+Позволяет загружать данные из сервера и вставляет загруженные данные в выбранный элемент. <br>
+
+Пример:
+Есть txt файл "demo_test.txt" 
+
+
+		<h2>jQuery and AJAX is FUN!!!</h2>
+		<p id="p1">This is some text in a paragraph.</p>
+
+
+
+И сам запрос:
+
+
+		$("#div1").load("demo_test.txt");
+
+
+В этом запросе jQuery запрашивает тэг с id=div1 и вставляет в него содержимое из файла "demo_test.txt"
+
+### 2) jQuery Get & Post запросы: <br>
+
+Наиболее часто используемые методы для общения клиента с сервером. 
+
+* Get запрос (URL - директория, куда будет делаться запрос, callback - функция, которая будет выполняться в случае успеха)
+
+		$.get(URL,callback);
+
+Пример (делается запрос к "demo_test.asp" и в случае успеха появляется окно с данными страницы):
+
+		$("button").click(function(){
+		  $.get("demo_test.asp", function(data, status){
+		    alert("Data: " + data + "\nStatus: " + status);
+		  });
+		});
+
+
+* Post запрос (URL - директория, куда будет делаться запрос, data - доп. данные, сопутствующие запросу, callback - функция, которая будет выполняться в случае успеха)
+
+		$.post(URL,data,callback);
+
+
+Пример (делается запрос к "demo_test_post.asp" и в случае успеха появляется окно с данными страницы):
+
+
+		$("button").click(function(){
+		  $.post("demo_test_post.asp",
+		  {
+		    name: "Donald Duck",
+		    city: "Duckburg"
+		  },
+		  function(data, status){
+		    alert("Data: " + data + "\nStatus: " + status);
+		  });
+		});
 
