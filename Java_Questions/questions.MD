@@ -2149,21 +2149,40 @@ Lazy Loading - это паттерн разработки, это процесс
 
 <h1>*** Тестирование</h1>
 
----
-<h2>* TDD - Test Driver Development</h2>
+* https://www.youtube.com/watch?v=7mZqJShu_3c
+* https://junit.org/junit5/docs/current/user-guide/#writing-tests-assertions 
+* https://assertj.github.io/doc/ (assertJ documentation)
+* https://assertj.github.io/doc/#assertj-core
 
-* https://ru.wikipedia.org/wiki/%D0%A0%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0_%D1%87%D0%B5%D1%80%D0%B5%D0%B7_%D1%82%D0%B5%D1%81%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5
-
-Разработка через тестирование. Разработка через тестирование (англ. test-driven development, TDD) — техника разработки
-программного обеспечения, которая основывается на повторении очень коротких циклов разработки: сначала пишется тест,
-покрывающий желаемое изменение, затем пишется код, который позволит пройти тест, и под конец проводится рефакторинг
-нового кода к соответствующим стандартам.
 
 ---
 <h2>* Какие бывают тестирования? Типы, отличия и т.д?</h2>
-<p>
-<a href="https://habr.com/ru/post/358950/">Ссылка на отличную статью про тестирование</a>
-</p>
+
+### <b>Общие аннотации для JUnit:</b>
+* @DisplayName - название класса
+* @Disabled - отключение теста
+* @Nested - группировка тестов в класс с тестами 
+* @Tag - прикрепить тэг к тесту для группировки
+* @BeforeEach - запуск определенной логики перед каждым тестом
+* @AfterEach - запуск оперделенной логики после каждого теста
+* @RepeatedTest - для запуска одного теста несколько раз
+
+### <b>Основные Assertions для Junit5</b>
+* https://junit.org/junit5/docs/5.0.1/api/org/junit/jupiter/api/Assertions.html
+
+  * assertAll - запуск нескольких тестов одновременно
+  * assertArrayEquals
+  * assertEquals
+  * assertDoesNotThrow
+  * assertFalse
+  * assertNotEquals
+  * assertNull
+  * assertThrows - Executable should be supplied with lambda 
+  * assertTimeOut - Executable should be supplied with lambda
+  * assertTrue
+
+
+<p><a href="https://habr.com/ru/post/358950/">Ссылка на отличную статью про тестирование</a></p>
 
 * Блочное(модульное) тестирование (Unit testing) - тестирование одного модуля в изоляции.<br>
   Модульные тесты имеют максимально узкую область среди всех тестов в наборе тестов. Количество юнит-тестов в наборе
@@ -2193,29 +2212,6 @@ Lazy Loading - это паттерн разработки, это процесс
 * Ручное тестирование;
 * Сквозные тесты;
 * Приемочные тесты;
-
----
-<h2>* TDD, BDD testing? Отличия, особенности. </h2>
-
-* https://ru.wikipedia.org/wiki/%D0%A0%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0_%D1%87%D0%B5%D1%80%D0%B5%D0%B7_%D1%82%D0%B5%D1%81%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5
-* https://ru.wikipedia.org/wiki/BDD_(%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5)
-
-<b>TDD - Test Driven Development</b> <br>
-<b>BDD - Behavior Driven Development</b> <br>
-
-TDD - суть методологии в том, что в первую очередь пишутся тесты, а потом под эти тесты разрабатывается функционал. <br>
-
-BDD - это расширенная (дополненная) версия TDD методологии. Особенность BDD в том, что в начале пишется на
-человекоподобном скриптовом языке тестовый сценарий. Этот язык очень простой, очень понятный, благодаря этому многие
-нетехнические специалисты также могут участвовать в этапе тестирования. <br>
-
-<i>Список инструментов, поддерживающих BDD методологию</i>:
-
-* Cucumber
-* Easy B
-* JDave
-* JBehave
-* SpecFlow и т.д.
 
 ---
 <h2>* Функциональное тестирование. Что это?</h2>
@@ -2254,12 +2250,202 @@ BDD - это расширенная (дополненная) версия TDD м
 проверяемой функции, в то время как дымовое направлено вширь, для покрытия тестами как можно большего функционала в
 кратчайшие сроки.
 
+
+---
+<h2>* TDD - Test Driver Development</h2>
+
+* https://ru.wikipedia.org/wiki/%D0%A0%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0_%D1%87%D0%B5%D1%80%D0%B5%D0%B7_%D1%82%D0%B5%D1%81%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5
+
+<img src="https://marsner.com/wp-content/uploads/test-driven-development-TDD.png" width="500">
+
+Разработка через тестирование. Разработка через тестирование (англ. test-driven development, TDD) — техника разработки
+программного обеспечения, которая основывается на повторении очень коротких циклов разработки: сначала пишется тест,
+покрывающий желаемое изменение, затем пишется код, который позволит пройти тест, и под конец проводится рефакторинг
+нового кода к соответствующим стандартам.
+
+---
+<h2>* TDD, BDD testing? Отличия, особенности. </h2>
+
+* https://ru.wikipedia.org/wiki/%D0%A0%D0%B0%D0%B7%D1%80%D0%B0%D0%B1%D0%BE%D1%82%D0%BA%D0%B0_%D1%87%D0%B5%D1%80%D0%B5%D0%B7_%D1%82%D0%B5%D1%81%D1%82%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5
+* https://ru.wikipedia.org/wiki/BDD_(%D0%BF%D1%80%D0%BE%D0%B3%D1%80%D0%B0%D0%BC%D0%BC%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%B8%D0%B5)
+
+<b>TDD - Test Driven Development</b> <br>
+<b>BDD - Behavior Driven Development</b> <br>
+
+TDD - суть методологии в том, что в первую очередь пишутся тесты, а потом под эти тесты разрабатывается функционал. <br>
+
+BDD - это расширенная (дополненная) версия TDD методологии. Особенность BDD в том, что в начале пишется на
+человекоподобном скриптовом языке тестовый сценарий. Этот язык очень простой, очень понятный, благодаря этому многие
+нетехнические специалисты также могут участвовать в этапе тестирования. <br>
+
+<i>Список инструментов, поддерживающих BDD методологию</i>:
+
+* Cucumber
+* Easy B
+* JDave
+* JBehave
+* SpecFlow и т.д.
+
+--- 
+<h2>* DDT - Data-Driven Testing. Особенности</h2>
+
+* https://en.wikipedia.org/wiki/Data-driven_testing#:~:text=Data%2Ddriven%20testing%20(DDT),the%20process%20where%20test%20environment 
+* https://www.baeldung.com/parameterized-tests-junit-5 
+
+### <b>Основные аннотации:</b>
+* @ParameterizedTest - определяем как параметризованный
+* @ValueSource(ints = {1, 3, 5, -3, 15, Integer.MAX_VALUE}) - использует в качестве источника данных массив
+* @EnumSource(Month.class) - использует в качестве источника данных Enum
+* @CsvSource(value = {"test:test", "tEst:test", "Java:java"}, delimiter = ':') - подача данных в формате CSV файла
+* @CsvFileSource(resources = "/data.csv", numLinesToSkip = 1) - подача данных в виде CSV файла
+* @NullSource - источник данных NUll
+* @EmptySource - источник данных пустой
+* @MethodSource - аналогичен CsvSource, данные также подаются в формате input,expected. Однако в input/expected можно подавать более сложные объекты.
+
+DDT - Data-Driven Testing, его еще называют параметризированным тестированием. <br>
+DDT важен, т.к тестировщики частенько используют различные данные для написания тестов. И вместо того чтобы писать индивидуальный тест под каждый кейс с данными, проще всего создать один тест с указанием ресурса.  
+
+
+Junit предоставляет возможность писать параметризованные тесты - то есть вызывать многократно тест с различными входными данными. <br>
+
+### Пример:<br>
+
+    public class Numbers {
+        public static boolean isOdd(int number) {
+            return number % 2 != 0;
+        }
+    }
+
+
+    @ParameterizedTest
+    @ValueSource(ints = {1, 3, 5, -3, 15, Integer.MAX_VALUE}) // six numbers
+    void isOdd_ShouldReturnTrueForOddNumbers(int number) {
+        assertTrue(Numbers.isOdd(number));
+    }
+
+
+В параметризованном тесте необходимо использовать аннотацию @ParameterizedTest, а также указать источник данных. В данном случае данные предоставляются через аннотацию @ValueSource подав на вход массив чисел. 
+<br>
+Также в качестве источника данных можно использовать другие форматы данных через следующие аннотации: <b> @EnumSource, @CsvSource, @CsvFileSource </b>
+
+
+<b>Пример для Enum:</b>
+
+    @ParameterizedTest
+    @EnumSource(Month.class) // passing all 12 months
+    void getValueForAMonth_IsAlwaysBetweenOneAndTwelve(Month month) {
+        int monthNumber = month.getValue();
+        assertTrue(monthNumber >= 1 && monthNumber <= 12);
+    }
+
+
+<b>Пример для CsvSource:</b>
+
+
+    @ParameterizedTest
+    @CsvSource(value = {"test:test", "tEst:test", "Java:java"}, delimiter = ':')
+    void toLowerCase_ShouldGenerateTheExpectedLowercaseValue(String input, String expected) {
+        String actualValue = input.toLowerCase();
+        assertEquals(expected, actualValue);
+    }
+
+
+<b>Пример для CsvFileSource:</b>
+
+
+    input,expected
+    test,TEST
+    tEst,TEST
+    Java,JAVA
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/data.csv", numLinesToSkip = 1)
+    void toUpperCase_ShouldGenerateTheExpectedUppercaseValueCSVFile(
+      String input, String expected) {
+        String actualValue = input.toUpperCase();
+        assertEquals(expected, actualValue);
+    }
+
+<b>Пример для MethodSource</b>
+
+В @MethodSource указывается название метода, который будет поставщиком данных (input + expected ) для теста. В самом методе создается Stream из Аргументов. 
+
+
+    @ParameterizedTest
+    @MethodSource("supplierMethod")
+    void shouldTestSimpleObjectWithSource(String input, boolean expected) {
+        assertEquals(expected, Strings.isEmpty(input));
+    }
+
+    private static Stream<Arguments> supplierMethod() {
+        return Stream.of(
+               Arguments.of("", true),
+               Arguments.of(null, true),
+               Arguments.of("bla", false)
+        );
+    }
+
+
+Другой пример в качестве input поступают объекты класса Person, expected ожидает String:<br>
+
+    @ParameterizedTest
+    @MethodSource("supplierObjectMethod")
+    void shouldTestComplexObjectWithSource(Person input, String expected) {
+        assertEquals(expected, input.getName().toUpperCase());
+    }
+
+    private static Stream<Arguments> supplierObjectMethod() {
+        return Stream.of(
+                Arguments.of(new Person(1, "dima"), "DIMA"),
+                Arguments.of(new Person(1, "gosha"), "GOSHA"),
+                Arguments.of(new Person(1, "azat"), "AZAT")
+        );
+    }
+
+
 ---
 <h2>* Что такое Mock? Фреймворк Mockito? Особенности тестирования через Mock.</h2>
 
+* https://www.baeldung.com/mockito-annotations
+* https://www.baeldung.com/java-spring-mockito-mock-mockbean#:~:text=We%20can%20use%20the%20%40MockBean,type%20in%20the%20application%20context.&text=This%20annotation%20is%20useful%20in,service%2C%20needs%20to%20be%20mocked.
+
+### <b>Общие аннотации для Mockito:</b>
+
+* @ExtendWith(MockitoExtension.class)
+* @WebMvcTest(PersonController.class)
+
+* @InjectMocks
+* @Mock - позволяет создавать мок объект и описание его поведение
+
+<!-- SpringBoot Класс (org.springframework.boot.test.mock.mockito.MockBean;)-->
+* @MockBean - эта аннотация добавляет Mockito Моки в ApplicationContext Спринг приложения
+
+### <b>Основные методы Mockito:</b>
+
+* when -> then
+* verify - verify(repository).findall(), подтверждаем , что был вызван метод findall репозитория. 
+
+
+
+
+<b>Пример создания Mock объекта:</b>
+
+    @Mock
+    List<String> mockedList;
+    <!-- описываем поведение списка при вызове метода size() -->
+    Mockito.when(mockedList.size()).thenReturn(100);
+
+
+
+verify
+тестирование исключений
+
+
 # TODO
 
-* https://www.baeldung.com/mockito-annotations
+
+
+
 
 ---
 <h2>* Фреймворк Cucumber</h2>
