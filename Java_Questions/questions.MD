@@ -716,16 +716,21 @@ ClassLoader - самый низкоуровневый, «глубинный» м
 
 Все исключения являются потомками класса <b>Throwable</b>.
 
+<b>Иерархия</b>
+
+<img src="https://static.javatpoint.com/images/throwable.png" width="500"><br><br>
+
 <i>unchecked exception</i> - наследники классов Error и RunTimeException, <br>
-<i>checked exception</i> - наследники Throwable и Exception.
+<i>checked exception</i> - наследники Throwable, кроме RunTimeException и Error.
 <br><br>
 <b>Примеры unchecked exception Error</b>: OutOfMemoryError, StackOverFlowError, LinkageError<br>
 <b>Примеры unchecked exception RunTimeException</b>: IndexOutOfBoundsException, ArithmeticException,
-IllegalArgumentException<br>
+IllegalArgumentException, NullPointerException (в случае когда объект - null), ClassCastException (в случае когда нельзя сконвертировать один тип в другой),
+<br>
 
-Примеры checked Exception: IO Exception (FileNotFoundException), SocketException<br>
-Java проверяет checked exceptions в момент компиляции и с этими эксепшами используется ключевое слово "throws",
-Unchecked exception не проверяются в момент компиляции, они могут возникнуть в момент работы приложения.
+<b>Примеры checked Exception</b>: IO Exception (FileNotFoundException), SocketException, ClassNotFoundException (класс не может быть найден в classpath), InterruptedException, NoSuchMethodException<br>
+Java проверяет checked exceptions в момент компиляции и с этими эксепшами необходимо использовать ключевое слово "throws" или обернуть выражение в try-catch блок (инаже код не скомпилируется), 
+Unchecked exception не проверяются в момент компиляции, они могут возникнуть в момент работы приложения. В unchecked нет необходимости добавлять try-catch блок, код скомпилируется. Однако чтобы в приложении избежать Unchecked exception, рекомендуется импользовать try-catch блок. 
 
 <br>
 Что значит “проверяемые”? ...компилятор Java знает о самых распространенных исключениях, и знает, в каких ситуациях они могут возникнуть”. Поэтому компилятор заранее проверяет наш код на наличие потенциальных исключений. Если он их найдет, то не скомпилирует код, пока мы не обработаем их или не пробросим наверх. Поэтому они проверяемые. 
@@ -799,24 +804,37 @@ Immutable - неизменяемый тип данных.
 
 В Java Immutable только String, остальные типы данные изменяемые - Mutable.
 
-
-
-
 --- 
 <h2>* Try with resources</h2>
+
+* https://www.baeldung.com/java-try-with-resources
 
 Try with resources был представлен в 7 версии Java. Позваляет использовать ресурсы в блоке try c гарантией того что
 после блока try ресурсы будут закрыты. Ресурсы должны обязательно имплементировать интерфейс AutoCloseable.
 
+При использовании нескольких ресурсов в Try with resources очередность закрытия ресурсов будет следующая: Самый первый ресурс закроется в самом конце. 
+
 Пример:
 
       try (Scanner scanner = new Scanner(new File("test.txt"))) { <br>
-      while (scanner.hasNext()) {<br>
-      System.out.println(scanner.nextLine());<br>
+        while (scanner.hasNext()) {<br>
+        System.out.println(scanner.nextLine());<br>
       }<br>
       } catch (FileNotFoundException fnfe) {<br>
-      fnfe.printStackTrace();<br>
+        fnfe.printStackTrace();<br>
       }
+
+Пример создания своего ресурса (для этого необходимо заимплементить AutoCloseable интерфейс и переопределить метод close):
+
+    public class MyResource implements AutoCloseable {
+        @Override
+        public void close() throws Exception {
+            System.out.println("Closed MyResource");
+        }
+    }
+
+
+
 
 ---
 <h2>* Autoboxing. Что это? Особенности Autoboxing. </h2>
