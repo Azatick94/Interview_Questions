@@ -1947,19 +1947,19 @@ Spring MVC состоит из следующих компонент:
 * Spring configuration (XML, Annotation, Java).
 
 ---
-<h2>Уровни изоляции транзакций</h2>
-* https://docs.microsoft.com/en-us/sql/connect/jdbc/understanding-isolation-levels?view=sql-server-ver15
-* https://ru.wikipedia.org/wiki/%D0%A3%D1%80%D0%BE%D0%B2%D0%B5%D0%BD%D1%8C_%D0%B8%D0%B7%D0%BE%D0%BB%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%BD%D0%BE%D1%81%D1%82%D0%B8_%D1%82%D1%80%D0%B0%D0%BD%D0%B7%D0%B0%D0%BA%D1%86%D0%B8%D0%B9
-* https://habr.com/ru/post/513644/ 
+<h2>* Уровни изоляции транзакций</h2>
+* https://docs.microsoft.com/en-us/sql/connect/jdbc/understanding-isolation-levels?view=sql-server-ver15 <br>
+* https://ru.wikipedia.org/wiki/ <br> %D0%A3%D1%80%D0%BE%D0%B2%D0%B5%D0%BD%D1%8C_%D0%B8%D0%B7%D0%BE%D0%BB%D0%B8%D1%80%D0%BE%D0%B2%D0%B0%D0%BD%D0%BD%D0%BE%D1%81%D1%82%D0%B8_%D1%82%D1%80%D0%B0%D0%BD%D0%B7%D0%B0%D0%BA%D1%86%D0%B8%D0%B9 <br>
+* https://habr.com/ru/post/513644/ <br>
 * https://www.baeldung.com/spring-transactional-propagation-isolation
 
 Транзакции указывают уровень изоляции, который определяет уровень доступа текущей транзакции к изменяемым данным другими транзакциями. 
 
 Проблемы параллельного доступа с использованием транзакций:
-* потерянное обновление (lost update) - при одновременном обновлении данных в таблице двумя потоками обновление пройдет только по одному потоку. 
-* «грязное» чтение (dirty reading) - чтение неподтвержденных данных, данные по которым откатились (транзакция прервалась и откатилась в предыдущее состояние). 
-* неповторяющееся значение (non-repeatable read) - ситуация, когда при повторном чтении в рамках одной транзакции ранее прочитанные данные оказываются изменёнными.
-* фантомное чтение (phantom read) - Ситуация, когда при повторном чтении в рамках одной транзакции одна и та же выборка дает разные множества строк.
+* <b>потерянное обновление (lost update)</b> - при одновременном обновлении данных в таблице двумя потоками обновление пройдет только по одному потоку. 
+* <b>«грязное» чтение (dirty reading)</b> - чтение неподтвержденных данных, данные по которым откатились (транзакция прервалась и откатилась в предыдущее состояние). 
+* <b>неповторяющееся значение (non-repeatable read)</b> - ситуация, когда при повторном чтении в рамках одной транзакции ранее прочитанные данные оказываются изменёнными.
+* <b>фантомное чтение (phantom read)</b> - Ситуация, когда при повторном чтении в рамках одной транзакции одна и та же выборка дает разные множества строк.
 
 Виды уровней изоляции транзакций:
 * <b>Read Uncommitted (чтение незафиксированных данных)</b> - Низший (первый) уровень изоляции.  Если несколько параллельных транзакций пытаются изменять одну и ту же строку таблицы, то в окончательном варианте строка будет иметь значение, определенное всем набором успешно выполненных транзакций. При этом возможно считывание не только логически несогласованных данных, но и данных, изменения которых ещё не зафиксированы. Типичный способ реализации данного уровня изоляции — блокировка данных на время выполнения команды изменения, что гарантирует, что команды изменения одних и тех же строк, запущенные параллельно, фактически выполнятся последовательно, и ни одно из изменений не потеряется. Транзакции, выполняющие только чтение, при данном уровне изоляции никогда не блокируются.
@@ -2006,7 +2006,7 @@ Spring MVC состоит из следующих компонент:
 
 * <b>REQUIRED Propagation</b> - параметр по умолчанию. Спринг проверяет есть ли активная транзакция, если есть, то бизнес логика добавляется в текущую транзакцию, если транзакции нет, то создается новая. 
 * <b>SUPPORTS Propagation</b> - если есть транзакция, то будет использоваться текущая транзакция, если нет, то транзакция не будет использоваться. 
-* <b>MANDATORY Propagation</b> - если есть транзакция, то будет использоваться текущая транзакция, то Спринг выбросит Exception. 
+* <b>MANDATORY Propagation</b> - если есть транзакция, то будет использоваться текущая транзакция, если нет, то Спринг выбросит Exception. 
 * <b>NEVER Propagation</b> - Спринг выбросить Exception если есть активная транзакция. 
 * <b>NOT_SUPPORTED</b> - если есть транзакция, то Спринг закрывает ее и далее бизнес-логика выполняется без транзакции. 
 * <b>REQUIRES_NEW</b> - Спринг останавливает текущую транзакцию и открывает новую. 
@@ -2221,11 +2221,6 @@ java
 “attribute1”,”value1”).addAttribute(“attribute2”,”value2”);
 
 ---
-<h2>* Как работает JDBC, описать простой Workflow JDBC, Особенности, преимущества, недостатки</h2>
-
-# TODO
-
----
 <h2>Spring Security, как создать Security, особенности, виды Security</h2>
 
 # TODO
@@ -2302,10 +2297,205 @@ Lazy Loading - это паттерн разработки, это процесс
 ---
 <h1>*** SPRING DATA (JDBC, JPA, HIBERNATE) </h1>
 
-<h2>* Spring Spring Java JPA</h2>
+---
+<h2>* Как работает JDBC, описать простой Workflow JDBC, Особенности, преимущества, недостатки</h2>
+
+* https://betacode.net/10167/java-jdbc
+* http://tutorials.jenkov.com/jdbc/index.html#jdbc-is-database-independent
+
+JDBC - Java DataBase Connectivity. 
+
+#### Особенности JDBC:
+* JDBC API использует различные Драйвера для подключения к различным БД. Этот процесс автоматизирован и не требует больших усилий в переходе от одной к другой БД.
+* JDBC SQL запросы зависят от диалекта БД. То есть один и тот же SQL запрос может не работать в разных БД. 
+* JDBC не используется для подключения в NoSQL БД. 
+
+Основные компоненты JDBC Api включает:
+1) DriverManager - класс, использующийся для управления списком Driver
+2) Driver - интерфейс, использующийся для соединения коммуникации с базой данных, управления коммуникации с базой данных. Когда загружается Driver, программисту не нужно конкретно вызывать его.
+3) Connection - Интерфейс со всеми методами связи с базой данных. Он описывает коммуникационный контекст. Вся связь с базой данных осуществляется только через объект соединения (connection).
+4) Statement - Это интерфейс, включающий команду SQL отправленный в базу данных для анализа, обобщения, планирования и выполнения.
+5) ResultSet - представляет набор записей, извлеченных из-за выполнения запроса.
+
+### Пример кода для работы с JDBC:
+
+
+    import java.sql.*;
+    public class JdbcExample {
+
+        public static void main(String[] args) throws ClassNotFoundException {
+            Class.forName("org.h2.Driver"); // было необходимо загружать класс до Java 6. Сейчас этот шаг можно упустить
+
+            // указываются параметры подключения к БД
+            String url      = "jdbc:h2:~/test";   
+            String user     = "sa";
+            String password = "";
+
+            try(Connection connection = DriverManager.getConnection(url, user, password)) {
+                try(Statement statement = connection.createStatement()){
+                    String sql = "select * from people";
+                    try(ResultSet result = statement.executeQuery(sql)){
+                        while(result.next()) {
+                            String name = result.getString("name");
+                            long   age  = result.getLong  ("age");
+                        }
+                    }
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+
+### Разберем основные этапы:
+
+1) Загрузка JDBC драйвера (до Java 6 был обязательным шагом. Сейчас это не нужно делать)
+
+    Class.forName("org.h2.Driver");
+
+
+2) Открытие Соединения с БД
+
+    Connection connection = DriverManager.getConnection(url, user, password);
+
+3) Создание Statement
+
+    Statement statement = connection.createStatement();
+
+4) Выполнение запроса в БД, получаем ResultSet и парсим результаты
+
+    String sql = "select * from people";
+    ResultSet result = statement.executeQuery(sql);
+    
+    while(result.next()) {
+        String name = result.getString("name");
+        long   age  = result.getLong  ("age");
+    }
+
+следует заметить что запрос Update лучше выполнять через метод executeUpdate. Пример:
+
+    Statement statement = connection.createStatement();
+    String    sql       = "update people set name='John' where id=123";
+    int rowsAffected    = statement.executeUpdate(sql);
+
+Либо пример удаления из БД:
+
+    Statement statement = connection.createStatement();
+    String    sql       = "delete from people where id=123";
+    int rowsAffected    = statement.executeUpdate(sql);
+      
+5) Закрытие соединения c БД. 
+
+    connection.close(); 
+
+---
+<h2>* JDBC Statement vs PreparedStatement</h2>
+
+В Java JDBC API существуют схожие интерфейсы StateMent и PreparedStatement. 
+PreparedStatement дополнительно использует параметры, которые вставляются в SQL запрос, позволяя тем самым вызывать запрос с различными входными параметрами. Statement требует фиксированный SQL запрос. У него нет функционала с входными параметрами.  
+
+Пример PreparedStatement:
+
+
+    String sql = "update people set firstname=? , lastname=? where id=?";
+
+    PreparedStatement preparedStatement =
+            connection.prepareStatement(sql);
+    preparedStatement.setString(1, "Gary");
+    preparedStatement.setString(2, "Larson");
+    preparedStatement.setLong  (3, 123);
+
+    int rowsAffected = preparedStatement.executeUpdate();
+
+---
+<h2>* JDBC Batch Processing. Transactions</h2>
+
+JDBC batch update - это когда мы делаем несколько запросов вместе, то есть происходит запрос батчем. Отправка SQL-ов запросов одним батчем намного быстрее, чем отправлять каждый SQL запрос отдельно. В Java JDBC API батч запросы можно выполнить используя <b>Statement</b> или <b>PreparedStatement</b>. 
+
+Пример батч запроса используя Statement:
+
+Statement statement = null;
+
+    try{
+        statement = connection.createStatement();
+        statement.addBatch("update people set firstname='John' where id=123");
+        statement.addBatch("update people set firstname='Eric' where id=456");
+        statement.addBatch("update people set firstname='May'  where id=789");
+
+        int[] recordsAffected = statement.executeBatch();
+    } finally {
+        if(statement != null) statement.close();
+    }
+
+Пример батч запроса используя PreparedStatement:
+
+
+    List<Person> persons = ... // get a list of Person objects from somewhere.
+    String sql = "update people set firstname=? , lastname=? where id=?";
+    PreparedStatement preparedStatement = null;
+    try{
+        preparedStatement =
+                connection.prepareStatement(sql);
+
+        for(Person person : persons) {
+            preparedStatement.setString(1, person.getFirstName());
+            preparedStatement.setString(2, person.getLastName());
+            preparedStatement.setLong  (3, person.getId());
+            preparedStatement.addBatch();
+        }
+        int[] affectedRecords = preparedStatement.executeBatch();
+    }finally {
+        if(preparedStatement != null) {
+            preparedStatement.close();
+        }
+    }
+
+В процессе батч запросов может произойти следующий кейс. Часть запросов может выполнится, а часть нет. Чтобы убедиться, что все запросы были выполнены успешно, необходимо батч запросы обернуть в JDBC транзакцию. Когда будет выполняться запросы, то либо они все выполнятся успешно, либо в случае ошибки, база откатится в предыдущее состояние. 
+
+Пример тразакции используя Java JDBC API Batch Update.
+
+
+    Connection connection = ...
+    try{
+        connection.setAutoCommit(false); // отключаем автокомит
+
+        Statement statement1 = null;
+        try{
+            statement1 = connection.createStatement();
+            statement1.executeUpdate(
+                "update people set name='John' where id=123");
+        } finally {
+            if(statement1 != null) {
+                statement1.close();
+            }
+        }
+        Statement statement2 = null;
+        try{
+            statement2 = connection.createStatement();
+            statement2.executeUpdate(
+                "update people set name='Gary' where id=456");
+        } finally {
+            if(statement2 != null) {
+                statement2.close();
+            }
+        }
+
+        connection.commit(); // выполняем запросы
+    } catch(Exception e) {
+        connection.rollback(); // в случае если что-то не выполнится, то возвращает БД в предыдущее состояние
+    } finally {
+        if(connection != null) {
+            connection.close(); // в конце закрываем соединение с БД - освобождаем ресурсы
+        }
+    }
+
+<h2>* Spring Java JPA</h2>
 
 * https://www.baeldung.com/the-persistence-layer-with-spring-data-jpa
 * https://docs.spring.io/spring-data/jpa/docs/current/reference/html/#repositories
+* https://en.wikibooks.org/wiki/Java_Persistence
 
 ### Список аннотаций:<br>
 
@@ -2412,7 +2602,7 @@ JpaRepository/CrudRepository. Пример ниже:<br>
 приложением и Hibernate.  <br>
 
 --- 
-<h2>EntityManager в JPA</h2>
+<h2>* EntityManager в JPA</h2>
 
 * https://dzone.com/articles/accessing-the-entitymanager-from-spring-data-jpa 
 * https://www.baeldung.com/hibernate-entitymanager (Guide to Hibernate EntityManager)
@@ -2445,11 +2635,20 @@ JpaRepository/CrudRepository. Пример ниже:<br>
 
 * https://www.javabullets.com/jpa-entity-lifecycle/
 
+---
+<h2>N+1 проблема при использовании JPA/Hibernate</h2>
 
+Проблема N + 1 возникает, когда фреймворк доступа к данным выполняет N дополнительных SQL-запросов для получения тех же данных, которые можно получить при выполнении одного SQL-запроса. Чем больше значение N, тем больше запросов будет выполнено и тем больше влияние на производительность.
 
+#### Пример:
+
+Представим 2 таблицы: post, post_comment (Посты и Комментарии с Постам). Эти таблицы связаны между собой через One-To-Many взаимосвязь (один Пост может содержать множество комментариев). 
+
+Если мы хотим запросить комментарии и наименование постов к которым написаны эти комментарии, то может возникнуть N+1 проблема. Hibernate вместо одного запроса может выполнить несколько запросов (1 запрос с SELECT запросом в таблицу post_comment и несколько запросов в таблицу post чтобы получить названия постов). 
+
+Чтобы избежать эту проблему, самый лучший способ - это использовать ключевую фразу <b>JOIN FETCH</b> в JPA/Hibernate запросе (аналог JOIN запроса в SQL синтаксисе). Этот способ позволяет решить N+1 проблему. 
 
 ---
-
 # <a name="testing"></a>
 
 <h1>*** Тестирование</h1>
