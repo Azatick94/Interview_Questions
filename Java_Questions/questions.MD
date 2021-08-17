@@ -1505,6 +1505,108 @@ Integer, вместо примитивный тип.
 
 
 ---
+<h2>* Comparable and Comparator</h2>
+Comparable - если хотим сравнивать объекты, то достаточно заимплементить интерфейс Comparable в классе и переопределить
+метод compareTo.<br>
+Comparator - это отдельный класс Компаратора, в котором описывается вся логика сравнения объектов. Компаратор позваляет
+сохранять исходный код объекта, не изменять default метод сортировки. Очень удобно.
+<br>
+<a href="https://javarush.ru/groups/posts/2262-comparator-v-java?post=full#discussion">Полезная ссылка</a>
+
+--- 
+<h2>* Class Enum. Constant specific class body. </h2>
+<a href="https://explained.blog/java/using-enum-and-constant-specific-class-body-in-java/">Ссылка на источник</a><br>
+
+Пример обычного enum-а:
+
+        enum Day {
+        SUNDAY,
+        MONDAY,
+        TUESDAY,
+        WEDNESDAY,
+        THURSDAY,
+        FRIDAY,
+        SATURDAY
+        };
+
+Enum создан для того, чтобы ограничить кол-во принимаемых значений параметра. Например - дни недели (их 7 шт, других не
+должно быть).
+<br> Однако Enum также может иметь атрибуты и методы. Приведем пример ниже:
+
+    enum Day {
+        SUNDAY(1),
+        MONDAY(2),
+        TUESDAY(3),
+        WEDNESDAY(4),
+        THURSDAY(5),
+        FRIDAY(6),
+        SATURDAY(7);
+        
+        int position;
+    
+        Day( int position ) {
+            this.position = position;
+        }
+    
+        public int getPosition() {
+            return this.position;
+        }
+    }
+
+    public class Example {
+        public static void main( String ... args ) {
+    
+            Day day = Day.SUNDAY;
+            System.out.println( "Position is " + day.getPosition() );   /* Position is 1 */
+    
+        }
+    }
+
+Однако предположим что мы хотим получить кол-во рабочих часов в каждом дне. Однако в этом случае, например, люди
+работают только в будние дни (то есть 9 часов в сумме) и в выходные отдыхают (Суббота-Воскресенье - 0 часов). Для этого
+случая были придуманы Constant specific class body.
+
+        enum WorkingHours {
+            SUNDAY {
+            public int getWorkingHours() {
+            return 0;
+            }
+            },
+            MONDAY,
+            TUESDAY,
+            WEDNESDAY,
+            THURSDAY,
+            FRIDAY,
+            SATURDAY{
+            public int getWorkingHours() {
+            return 0;
+            }
+            };
+        
+            public int getWorkingHours() {
+                return 9;
+            }
+        }
+        
+        public class Person {
+        public static void main( String ... args ){
+        WorkingHours day = WorkingHours.MONDAY;
+        System.out.println( "Today is " + day + " and i have " + day.getWorkingHours() + " working hours today." );
+        // Today is MONDAY and i have 9 working hours today.
+        
+                day = WorkingHours.SUNDAY;
+                System.out.println( "Today is " + day + " and i have " + day.getWorkingHours() + " working hours today." );
+                // Today is SUNDAY and i have 0 working hours today.
+            }
+        }
+
+---
+<h2>* Что такое сокет. Класс Socket. Для чего нужен? </h2>
+Сокет нужен для получения соединения между двумя машинами. Например, чтобы получить связь между клиентом и сервером.
+Одна сторона считывает данные, другая сторона записывает данные и наоборот. Class Socket имплементит интерфейс
+Closeable (то есть через метод close можно закрыть соединение между клиентом и сервером).
+
+---
 
 # <a name="java_collections"></a>
 
@@ -1612,32 +1714,6 @@ first-in-first-out). Помимо методов, определённых в и
 * int search(Object element) - Ищет элемент в стеке. Если найден, возвращается его смещение от вершины стека. В противном случае возвращается 1.
 
 ---
-<h2>* Иерархия Queue - очередей</h2>
-
-* https://www.geeksforgeeks.org/queue-interface-java/
-
-<img src="https://media.geeksforgeeks.org/wp-content/cdn-uploads/20200903183026/Queue-Deque-PriorityQueue-In-Java.png" width="500"><br>
-
----
-<h2>* Интерфейс Queue</h2>
-Интерфейс Queue расширяет Collection и объявляет поведение очередей, которые представляют собой список с дисциплиной "
-первый вошел, первый вышел" (FIFO). Существуют разные типы очередей, в которых порядок основан на некотором критерии.
-FIFO - First In, First Out;
-
----
-<h2>* BlockingQueue </h2>
-Интерфейс BlockingQueue наследует свойства интер фейса Queue;
-
-Реализация данного интерфейса обеспечивает блокировку потока в двух случаях:<br>
-Когда поток пытается получить элемент из пустой очереди, то он переводится в состояние ожидания до тех пор, пока
-какой-либо другой поток не разместит элемент в очереди.
-
-Аналогично при попытке положить элемент в полную очередь; поток ставится в ожидание до тех пор, пока другой поток не
-заберет элемент из очереди и, таким образом, не освободит место в ней. Естественно, понятие "полная очередь"
-подразумевает ограничение размера очереди. BlockingQueue изящно решает проблему передачи собранных одним потоком
-элементов для обработки в другой поток без явных хлопот о проблемах синхронизации.
-
----
 <h2>* Как устроен HashMap.</h2>
 
 * https://habr.com/ru/post/421179/
@@ -1705,107 +1781,33 @@ HashSet элементы не упорядочены, нет никаких га
 * TreeMap имплементирует NavigableMap, Treeset - NavigableSet;
 * TreeMap позволяет дубликаты, в Treeset дубликатов не должно быть;
 
----
-<h2>* Comparable and Comparator</h2>
-Comparable - если хотим сравнивать объекты, то достаточно заимплементить интерфейс Comparable в классе и переопределить
-метод compareTo.<br>
-Comparator - это отдельный класс Компаратора, в котором описывается вся логика сравнения объектов. Компаратор позваляет
-сохранять исходный код объекта, не изменять default метод сортировки. Очень удобно.
-<br>
-<a href="https://javarush.ru/groups/posts/2262-comparator-v-java?post=full#discussion">Полезная ссылка</a>
-
---- 
-<h2>* Class Enum. Constant specific class body. </h2>
-<a href="https://explained.blog/java/using-enum-and-constant-specific-class-body-in-java/">Ссылка на источник</a><br>
-
-Пример обычного enum-а:
-
-        enum Day {
-        SUNDAY,
-        MONDAY,
-        TUESDAY,
-        WEDNESDAY,
-        THURSDAY,
-        FRIDAY,
-        SATURDAY
-        };
-
-Enum создан для того, чтобы ограничить кол-во принимаемых значений параметра. Например - дни недели (их 7 шт, других не
-должно быть).
-<br> Однако Enum также может иметь атрибуты и методы. Приведем пример ниже:
-
-    enum Day {
-        SUNDAY(1),
-        MONDAY(2),
-        TUESDAY(3),
-        WEDNESDAY(4),
-        THURSDAY(5),
-        FRIDAY(6),
-        SATURDAY(7);
-        
-        int position;
-    
-        Day( int position ) {
-            this.position = position;
-        }
-    
-        public int getPosition() {
-            return this.position;
-        }
-    }
-
-    public class Example {
-        public static void main( String ... args ) {
-    
-            Day day = Day.SUNDAY;
-            System.out.println( "Position is " + day.getPosition() );   /* Position is 1 */
-    
-        }
-    }
-
-Однако предположим что мы хотим получить кол-во рабочих часов в каждом дне. Однако в этом случае, например, люди
-работают только в будние дни (то есть 9 часов в сумме) и в выходные отдыхают (Суббота-Воскресенье - 0 часов). Для этого
-случая были придуманы Constant specific class body.
-
-        enum WorkingHours {
-            SUNDAY {
-            public int getWorkingHours() {
-            return 0;
-            }
-            },
-            MONDAY,
-            TUESDAY,
-            WEDNESDAY,
-            THURSDAY,
-            FRIDAY,
-            SATURDAY{
-            public int getWorkingHours() {
-            return 0;
-            }
-            };
-        
-            public int getWorkingHours() {
-                return 9;
-            }
-        }
-        
-        public class Person {
-        public static void main( String ... args ){
-        WorkingHours day = WorkingHours.MONDAY;
-        System.out.println( "Today is " + day + " and i have " + day.getWorkingHours() + " working hours today." );
-        // Today is MONDAY and i have 9 working hours today.
-        
-                day = WorkingHours.SUNDAY;
-                System.out.println( "Today is " + day + " and i have " + day.getWorkingHours() + " working hours today." );
-                // Today is SUNDAY and i have 0 working hours today.
-            }
-        }
 
 ---
-<h2>* Что такое сокет. Класс Socket. Для чего нужен? </h2>
-Сокет нужен для получения соединения между двумя машинами. Например, чтобы получить связь между клиентом и сервером.
-Одна сторона считывает данные, другая сторона записывает данные и наоборот. Class Socket имплементит интерфейс
-Closeable (то есть через метод close можно закрыть соединение между клиентом и сервером).
+<h2>* Иерархия Queue - очередей</h2>
+
+* https://www.geeksforgeeks.org/queue-interface-java/
+
+![alt text](images/queue_hierarhy.png)
+
+---
+<h2>* Интерфейс Queue</h2>
+Интерфейс Queue расширяет Collection и объявляет поведение очередей, которые представляют собой список с дисциплиной "
+первый вошел, первый вышел" (FIFO). Существуют разные типы очередей, в которых порядок основан на некотором критерии.
+FIFO - First In, First Out;
+
+---
+<h2>* BlockingQueue </h2>
+Интерфейс BlockingQueue наследует свойства интер фейса Queue;
+
+Реализация данного интерфейса обеспечивает блокировку потока в двух случаях:<br>
+Когда поток пытается получить элемент из пустой очереди, то он переводится в состояние ожидания до тех пор, пока
+какой-либо другой поток не разместит элемент в очереди.
+
+Аналогично при попытке положить элемент в полную очередь; поток ставится в ожидание до тех пор, пока другой поток не
+заберет элемент из очереди и, таким образом, не освободит место в ней. Естественно, понятие "полная очередь"
+подразумевает ограничение размера очереди. BlockingQueue изящно решает проблему передачи собранных одним потоком
+элементов для обработки в другой поток без явных хлопот о проблемах синхронизации.
+
 
 ---
 
