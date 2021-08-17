@@ -2,6 +2,8 @@
 
 * [COMMON QUESTIONS](#common_questions)
   * [DOCKER](#docker)
+  * [MESSAGING](#messaging)
+  * [LINUX](#linux)
   * [ALGORITHMS](#algorithms)
 * [CORE JAVA](#core_java)
   * [JAVA MEMORY MODEL & GARBAGE COLLECTOR](#javamemory_gc)
@@ -100,6 +102,7 @@ container - running environment of an image.
 * '--rm' - эта опция заставляет Docker автоматически после остановки убирать Контейнер
 * '-it' - интерактивный мод, то есть при запуске заходим в Контейнер
 
+# <a name="messaging"></a>
 ---
 <h2>* Java Messaging. RabbitMQ?</h2>
 
@@ -170,6 +173,7 @@ RabbitMQ один из самых популярных имплементаци�
 
 # TODO
 
+# <a name="linux"></a>
 ---
 <h2>Команды Linux, основные команды. </h2>
 
