@@ -314,7 +314,6 @@ LEFT JOIN ON employee mgr ON emp.manager_id=mgr.employee_id; <br>
 * Индексы сокращают время поиска в абсолютном выражении. 
 * Индексы уменьшают алгоритмическую сложность процесса поиска. 
 
-# TODO (нужно детальнее разобрать виды индексов, особенности, когда используются)
 # Unique constraint vs unique index (https://dba.stackexchange.com/questions/144/when-should-i-use-a-unique-constraint-instead-of-a-unique-index)
 
 По умолчанию в PostgreSQL используется индекс на основе B-дерева, однако если нужно создать индекс другого типа, это можно указать с помощью команды USING. Пример создания индекса в PostgreSql:<br>
