@@ -1201,6 +1201,31 @@ Immutable - неизменяемый тип данных.<br>
 * внешние, подключаемые к процессу исследуемой программы извне
 
 ---
+<h2>* JMX - Java Management Extensions</h2>
+
+* https://en.wikipedia.org/wiki/Java_Management_Extensions
+* https://en.wikipedia.org/wiki/Java_Management_Extensions#Managed_beans
+* https://www.baeldung.com/java-management-extensions (пример реализации без аннотаций)
+* https://urvanov.ru/2018/05/05/%d0%b2%d0%b2%d0%b5%d0%b4%d0%b5%d0%bd%d0%b8%d0%b5-%d0%b2-jmx-%d0%b8-mbeans-%d0%b2-java/ (пример создания MBean)
+* https://urvanov.ru/2018/05/09/spring-boot-%D0%B8-jmx/ (Spring аннотации JMX)
+* https://dzone.com/articles/spring-boot-and-working-with-mbeans (Spring аннотации JMX)
+
+Java Management Extensions (JMX) - это технология Java, которая предоставляет инструменты для управления и мониторинга приложений, системных объектов, устройств (например, принтеров) и сервисно-ориентированных сетей. Эти ресурсы представлены объектами, называемыми MBeans (для Managed Bean). <br>
+
+MBean представляет собой ресурс, работающий на виртуальной машине Java, такой как приложение или техническая служба Java EE (монитор транзакций, драйвер JDBC и т. Д.). Их можно использовать для сбора статистики по таким проблемам, как производительность, использование ресурсов или проблемы (вытягивание); для получения и настройки конфигураций или свойств приложения (push / pull); и уведомление о таких событиях, как сбои или изменения состояния (push).
+
+### Создание MBean <br>
+При создании MBean-компонентов мы должны соблюдать определенный шаблон проектирования. Класс модели MBean ДОЛЖЕН реализовывать интерфейс со следующим именем: <b>«имя класса модели» плюс MBean.</b>
+
+### JMX в SpringBoot
+Следующие аннотацию используются в SpringBoot для применения JMX:<br>
+
+* @ManagedResource - эта аннотация Spring применяется на уровне класса, и это объявляет его как MBean.
+* @ManagedOperation - применяется на методе, метод будет показан как доступная операция в консоли JMX для MBean.
+* @ManagedOperationParameters - если у метода есть входные параметры, можно использовать эту аннотацию. 
+* @ManagedAttribute - управляемый атрибут.
+
+---
 <h2>* JIT компилятор</h2>
 * https://ru.wikipedia.org/wiki/JIT-%D0%BA%D0%BE%D0%BC%D0%BF%D0%B8%D0%BB%D1%8F%D1%86%D0%B8%D1%8F
 
@@ -1424,7 +1449,7 @@ public.
 ко всем (в том числе приватным) полям и методам внешнего класса, но не наоборот.
 
 ---
-<h2>* Может ли try быть c catch</h2>
+<h2>* Может ли try быть без catch</h2>
 * https://java2blog.com/can-we-have-try-without-catch-block-in-java/#:~:text=Yes%2C%20we%20can%20have%20try,except%20in%20case%20of%20System. 
 
 Может быть, если используется finally блок. Finally всегда используется, даже если выбрасывается исключение. 
