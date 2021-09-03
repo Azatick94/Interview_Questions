@@ -2821,13 +2821,6 @@ SPRING CLOUD
 <br>
 AspectJ — конкретная реализация парадигм АОП, реализующая возможности решения сквозных задач. Документацию можно найти вот тут.
 
-
-
-
-
-
-
-
 ---
 <h2>* Виды внедрения зависимостей в Spring.</h2>
 Зависимости можно внедрять через:<br>
@@ -3482,8 +3475,36 @@ JpaRepository/CrudRepository. Пример ниже:<br>
 * https://assertj.github.io/doc/ (assertJ documentation)
 * https://assertj.github.io/doc/#assertj-core
 
-# Rule в Junit, особенности 
-# TODO
+---
+<h2>* Rule в Junit, особенности </h2>
+
+* https://www.baeldung.com/junit-4-rules
+
+Аннотация @Rule в Junit предоставляют гибкий механизм для улучшения тестов путем запуска некоторого кода вокруг выполнения тестового примера. В некотором смысле это похоже на аннотации @Before и @After в нашем тестовом классе.
+
+Представим, что мы хотим подключиться к внешнему ресурсу, например, к базе данных, во время настройки теста, а затем закрыть соединение после завершения теста. Если мы захотим использовать эту базу данных в нескольких тестах, нам придется дублировать этот код в каждом тесте.
+
+Используя правило, мы можем изолировать все в одном месте и легко повторно использовать код из нескольких тестовых классов.
+
+JUnit предоставляет список Правил Rules как часть пакета org.junit.rules. <br>
+При тестировании нам часто требуется доступ к временному файлу или папке. Однако управление созданием и удалением этих файлов может быть обременительным. Используя правило TemporaryFolder, мы можем управлять созданием файлов и папок, которые должны быть удалены при завершении метода тестирования:
+
+Пример Кода: <br>
+
+    @Rule
+    public TemporaryFolder tmpFolder = new TemporaryFolder();
+
+    @Test
+    public void givenTempFolderRule_whenNewFile_thenFileIsCreated() throws IOException {
+        File testFile = tmpFolder.newFile("test-file.txt");
+
+        assertTrue("The file should have been created: ", testFile.isFile());
+        assertEquals("Temp folder and test file should match: ", 
+          tmpFolder.getRoot(), testFile.getParentFile());
+    }
+
+
+
 
 ---
 <h2>* Какие бывают тестирования? Типы, отличия и т.д?</h2>
