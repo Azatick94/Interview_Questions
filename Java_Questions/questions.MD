@@ -735,6 +735,46 @@ Quick sort Explained.
 
 # <a name="core_java"></a>
 
+--- 
+<h2>* Java Logging. Что такое Slf4j. Что из себя представляет.</h2>
+
+* http://www.slf4j.org/
+* http://www.slf4j.org/manual.html
+
+SLF4J - Simple Logging Facade for Java
+
+SLF4J - представляет из себя абстракцию (фасад) над различными фрейворками логгирования. Например над: java.util.logging, logback, log4j. SLF4J таким образом позволяет пользователю подключать желаемый фреймворт логгирования во время развертывания приложения. 
+
+В SLF4J есть такое понятие как Fluent API. Эта сущность упрощает написание логгирования с применением аргументов. Приведем примеры сравнения логгирования использую Fluent Api и без него:<br>
+
+        int newT = 15;
+        int oldT = 16;
+
+        // using traditional API
+        logger.debug("Temperature set to {}. Old temperature was {}.", newT, oldT);
+
+        // using fluent API, add arguments one by one and then log message
+        logger.atDebug().addArgument(newT).addArgument(oldT).log("Temperature set to {}. Old temperature was {}.");
+
+        // using fluent API, log message with arguments
+        logger.atDebug().log("Temperature set to {}. Old temperature was {}.", newT, oldT);
+
+
+Основной зависимостью SLF4J является slf4j-api-${project.version}.jar. <br>
+Также необходимо установить дополнительно Binding (какой фреймворк будет использовать SLF4J), указанный из списка выше. Например: slf4j-simple-${latest.stable.version}.jar
+
+При работе в Spring-Boot проекте spring-starter по умолчанию подтягивает log-back зависимости: logback-classic-${logback.version}.jar
+
+SLF4J поставляется с несколькими jar файлами и с помощью SLF4J binding можно выбирать framework который нужен для использования. 
+Список возможных jar файлов: 
+* slf4j-log4j12-${latest.stable.version}.jar - log4j версия 1.2
+* slf4j-jdk14-${latest.stable.version}.jar - JDK 1.4 logging
+* slf4j-nop-${latest.stable.version}.jar - no operation Logger
+* slf4j-simple-${latest.stable.version}.jar - Binding for Simple implementation, which outputs all events to System.err. Only messages of level INFO and higher are printed. This binding may be useful in the context of small applications.
+* slf4j-jcl-${latest.stable.version}.jar - Jakarta Commons Logging
+* logback-classic-${logback.version}.jar (requires logback-core-${logback.version}.jar) - There are also SLF4J bindings external to the SLF4J project, e.g. logback which implements SLF4J natively. Logback's ch.qos.logback.classic.Logger class is a direct implementation of SLF4J's org.slf4j.Logger interface. Thus, using SLF4J in conjunction with logback involves strictly zero memory and computational overhead.
+
+
 <h1>*** Core JAVA</h1>
 ---
 <h2>* Парадигмы программирования</h2>
@@ -2788,6 +2828,7 @@ SPRING CLOUD
 * https://habr.com/ru/post/428548/
 * https://javarush.ru/groups/posts/3137-chto-takoe-aop-osnovih-aspektno-orientirovannogo-programmirovanija (отличные примеры использования Аспектов)
 * https://docs.spring.io/spring-framework/docs/2.0.x/reference/aop.html
+* https://www.baeldung.com/spring-aop-annotation (своя кастомная Spring Aop аннотация)
 
 АОП - это парадигма программирования, направленная на повышение модульности за счет разделения сквозных задач. Это достигается путем добавления дополнительного поведения к существующему коду без изменения самого кода.
 Вместо этого мы можем объявить новый код и новое поведение отдельно.
@@ -2901,12 +2942,30 @@ java
 ---
 <h2>Spring Security, как создать Security, особенности, виды Security</h2>
 
-# TODO
+* https://docs.spring.io/spring-security/site/docs/current/reference/html5/#community-source
 
 --- 
 <h2>OAuth, OAuth 2.0. Что это?</h2>
 
 <b>OAuth</b> - это протокол или фрэймворк авторизации с открытым стандартом, которая предоставляет приложениям возможность «защищенного назначенного доступа». Например, вы можете сообщить Facebook, что для ESPN.com можно получить доступ к вашему профилю или публиковать обновления в вашей временной шкале, не сообщая ESPN свой пароль Facebook. Это сводит к минимуму риск в значительной степени: в случае взлома ESPN ваш пароль Facebook остается в безопасности.
+
+--- 
+<h2>Security Vulnerabilities</h2>
+
+* https://ru.wikipedia.org/wiki/%D0%A0%D0%B0%D0%B4%D1%83%D0%B6%D0%BD%D0%B0%D1%8F_%D1%82%D0%B0%D0%B1%D0%BB%D0%B8%D1%86%D0%B0
+* https://www.geeksforgeeks.org/understanding-rainbow-table-attack/
+
+### Rainbow Table Attack (радужная таблица).  
+
+--- 
+<h2>* Аннотация @EnableGlobalMethodSecurity()</h2>
+
+Эта аннотация включает безопасность глобальный метод Spring Security. 
+<br>
+У аннотации есть следующие параметры: <br>
+* prePostEnabled - позволяет Spring Security добавлять pre/post аннотации
+* securedEnabled - позволяет добавлять аннотацию @Secured
+* jsr250Enabled - позволяет использовать @RoleAllowed аннотацию 
 
 ---
 <h2>* Что такое Proxy в Spring? </h2>
