@@ -1091,6 +1091,7 @@ SLF4J поставляется с несколькими jar файлами и �
 
 ---
 <h2>* Mutable vs Immutable Objects in Java</h2>
+
 * https://www.interviewcake.com/concept/java/mutable#:~:text=A%20mutable%20object%20can%20be,an%20immutable%20object%20can't.&text=That%20said%2C%20if%20you're,all%20fields%20final%20and%20private.&text=Strings%20are%20immutable%20in%20Java
 
 Mutable - изменяемый тип данных. Может быть изменен после создания. <br>
