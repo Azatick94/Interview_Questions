@@ -2803,15 +2803,54 @@ REST - это прикладной программный интерфейс (AP
 ---
 <h2>* Что такое SOAP?</h2>
 
-* https://ru.wikipedia.org/wiki/SOAP#:~:text=SOAP%20(%D0%BE%D1%82%20%D0%B0%D0%BD%D0%B3%D0%BB.,%D1%83%D0%B4%D0%B0%D0%BB%D1%91%D0%BD%D0%BD%D0%BE%D0%B3%D0%BE%20%D0%B2%D1%8B%D0%B7%D0%BE%D0%B2%D0%B0%20%D0%BF%D1%80%D0%BE%D1%86%D0%B5%D0%B4%D1%83%D1%80%20(RPC)
+<b>SOAP - Simple Object Access Protocol</b>
+
+* https://en.wikipedia.org/wiki/SOAP - определение SOAP
 * https://proselyte.net/tutorials/soap-tutorial/introduction/
 * https://www.baeldung.com/jax-ws
+https://spring.io/guides/gs/producing-web-service/ - проект создания веб-сервиса с помощью технологии SOAP
+* https://spring.io/guides/gs/consuming-web-service/ - проект как общаться с SOAP сервисом в качестве клиента
+* https://www.w3schools.com/xml/schema_simple.asp - некоторые туториалы
 
-SOAP (Simple Object Access Protocol) - протокол обмена структурированными сообщениями для связи в интернете. Протокол
-используется для обмена произвольными сообщениями в формате XML.
+SOAP - протокол обмена структурированными сообщениями для связи в интернете. Протокол используется для обмена произвольными сообщениями в формате XML.
 
-Сообщения формата SOAP независимы от операционной системы и могут использоваться с различными протоколами связи (HTTP,
-SMTP)
+Сообщения формата SOAP независимы от операционной системы и могут использоваться с различными протоколами связи (HTTP, SMTP)
+
+Для работы с SOAP можно воспользоваться проектом Spring Web Services.
+https://spring.io/projects/spring-ws
+
+Домен веб-службы определяется в файле схемы XML (XSD), который Spring-WS автоматически экспортирует как WSDL.
+
+https://en.wikipedia.org/wiki/Web_Services_Description_Language
+
+WSDL - (Web Services Description Language) - это язык описания интерфейса на основе XML, который используется для описания функций, предлагаемых веб-службой. Аббревиатура также используется для любого конкретного WSDL-описания веб-службы (также называемого файлом WSDL), которое предоставляет машиночитаемое описание того, как можно вызвать службу, какие параметры она ожидает и какие структуры данных возвращает. Следовательно, его цель примерно аналогична сигнатуре типа в языке программирования.
+
+Вопросы:
+1) Можно ли добавить конструктор в файл XSD - Можно добавить в сгенерированные классы, но это неправильно.
+   Эти сгенерированные классы из XSD используются структурами маршалинга/демаршаллинга, за исключением конструктора без аргументов. Также вы не должны (ИМХО) использовать эти вещи как сущности в своем приложении, только для транспорта (в качестве контракта). Это точка интеграции для вашего приложения
+
+https://stackoverflow.com/questions/39892408/spring-xsd-file-with-constructor
+
+2) Добавление toString, hashCode, equals при создании классов JAXB в Java
+
+https://stackoverflow.com/questions/32334372/add-tostring-hashcode-equals-while-generating-jaxb-classes-in-java
+
+
+Основные аннотации Spring Web Services (Spring WS):
+* @Endpoint - аннотация регистрирует класс в Spring WS как потенциального кандидата для обработки входящих сообщений SOAP.
+* @PayloadRoot - аннотация используется Spring WS для выбора метода обработчика на основе пространства имен (namespace) и localPart.
+
+private static final String NAMESPACE_URI = "http://spring.io/guides/gs-producing-web-service";
+@PayloadRoot(namespace = NAMESPACE_URI, localPart = "getCountryRequest")
+
+* @RequestPayload - аннотация указывает, что входящее сообщение будет сопоставлено с параметрами запроса метода
+
+* @ResponsePayload - аннотация заставляет Spring WS сопоставлять возвращаемое значение с полезной нагрузкой ответа.
+
+
+Конфигурирование<br>
+@EnableWs - Добавьте эту аннотацию в класс @Configuration, чтобы конфигурация веб-служб Spring, определенная в WsConfigurationSupport, была импортирована.
+@Configuration
 
 
 ---
