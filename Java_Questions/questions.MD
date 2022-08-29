@@ -2168,7 +2168,7 @@ Single Abstract Method) является функциональным интер
 <p>Стрим из указанных элементов: Stream.of("1", "2", "3")</p>
 
 <a href="https://habr.com/ru/company/luxoft/blog/270383/">Очень полезная ссылка</a><br>
-<b>Основные промежуточные операции лямбда выражений.</b>
+<b>Основные промежуточные (intermediate) операции лямбда выражений.</b>
 
 * filter - фильтрация записей.
 * skip - пропуск N записей.
@@ -2178,7 +2178,7 @@ Single Abstract Method) является функциональным интер
 * sorted- сортировка значений либо в натуральном порядке, либо с применением Comparator.
 * mapToInt, mapToDouble, mapToLong - аналог map, но возвращает числовой стрим.
 
-<b>Основные терминальные операции лямбда выражений. </b>
+<b>Основные терминальные (terminal) операции лямбда выражений. </b>
 
 * findFirst - возвращает первый элемент.
 * collect - представление результата в виде коллекций или других структур данных.
@@ -2230,8 +2230,60 @@ Single Abstract Method) является функциональным интер
 
 ---
 <h2>* Что делает метод peek()</h2>
+Возвращает stream, состоящий из элементов этого потока, дополнительно выполняя указанное действие над каждым элементом по мере потребления элементов из результирующего потока. Это промежуточная операция (intermediate operation), а так как промежуточные операции - lazy,они не будут выполняться пока не вызовется терминальная операция.<br>
+
+    public abstract Stream<T> peek(java.util.function.Consumer<? super T> action )
+
+
 Метод peek() позволяет видеть/принтовать промежуточную результаты работы Стримов. Больше всего используется для
 debugging проблем.
+
+---
+<h2>* Optional Api </h2>
+
+1)EXAMPLES OF OPTIONAL INITIALIZATION
+
+       // Returns an Optional describing the given non-null value.
+        Optional<String> opt1 = Optional.of("Test");
+
+        //  Returns an Optional describing the given value, if non-null, otherwise returns an empty Optional.
+        Optional<String> opt2 = Optional.ofNullable("sdf");
+
+        // Returns an empty Optional instance. No value is present for this Optional.
+        Optional<Object> opt3 = Optional.empty();
+ 
+
+2)OPTIONAL. ifPresent(), ifPresentOrElse(), isEmpty(), isPresent()  
+
+        Optional<String> optFunc1 = Optional.ofNullable("Test");
+        Optional<String> optFunc2 = Optional.ofNullable(null);
+
+        // If a value is present, performs the given action with the value, otherwise does nothing.
+        optFunc1.ifPresent(v -> System.out.println("Value " +v));
+        optFunc2.ifPresent(v -> System.out.println("Value " +v));
+        System.out.println("-".repeat(10));
+
+        // If a value is present, performs the given action with the value, otherwise performs the given empty-based action.
+        optFunc1.ifPresentOrElse(v -> System.out.println("Value " + v), () -> System.out.println("Value Not Present"));
+        optFunc2.ifPresentOrElse(v -> System.out.println("Value " + v), () -> System.out.println("Value Not Present"));
+
+        // If a value is not present, returns true, otherwise false.
+        optFunc1.isEmpty();
+        // If a value is present, returns true, otherwise false.
+        optFunc1.isPresent();
+
+3)OPTIONAL. orElse(), orElseGet(), orElseThrow()
+
+        // OPTIONAL, orElse(), orElseGet()
+        Optional<String> optOrElse = Optional.of("test");
+
+        // If a value is present, returns the value, otherwise returns other.
+        String replacement = optOrElse.orElse("Replacement");
+        // If a value is present, returns the value, otherwise returns the result produced by the supplying function.
+        optOrElse.orElseGet(() -> calc());
+
+        // If a value is present, returns the value, otherwise throws an exception produced by the exception supplying function.
+        optOrElse.orElseThrow(() -> new RuntimeException("Element not Found"));
 
 ---
 
