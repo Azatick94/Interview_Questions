@@ -1678,11 +1678,25 @@ Integer, вместо примитивный тип.
 ---
 <h2>* Comparable and Comparator</h2>
 Comparable - если хотим сравнивать объекты, то достаточно заимплементить интерфейс Comparable в классе и переопределить
-метод compareTo.<br>
-Comparator - это отдельный класс Компаратора, в котором описывается вся логика сравнения объектов. Компаратор позваляет
-сохранять исходный код объекта, не изменять default метод сортировки. Очень удобно.
+метод compareTo. Этот интерфейс делает наши объекты «сравнимыми» и создает для них наиболее естественный порядок сортировки, который будет использоваться в большинстве случаев.
 <br>
-<a href="https://javarush.ru/groups/posts/2262-comparator-v-java?post=full#discussion">Полезная ссылка</a>
+
+    public interface Comparable<T> {
+      int compareTo(T o);
+    }
+
+Comparator - это отдельный класс Компаратора, в котором описывается вся логика сравнения объектов. Компаратор позволяет
+сохранять исходный код объекта, не изменять default метод сортировки. То есть в случае если нам нужно реализовать какую-то специфическую сортировку, нам необязательно лезть и менять логику compareTo(). Вместо этого мы можем создать отдельный класс-comparator в нашей программе и научить его делать нужную нам сортировку!
+
+    public interface Comparator<T> {
+      int compare(T o1, T o2);  
+    }
+
+<br>
+
+* https://javarush.ru/groups/posts/2262-comparator-v-java?post=full#discussion (JavaRush пример)
+* https://github.com/Azatick94/Java_Learning/tree/main/Basic_Java/src/main/java/learning_questions_answering/java_core/comparable_comparator (Простой пример реализации)
+
 
 --- 
 <h2>* Class Enum. Constant specific class body. </h2>
@@ -2237,6 +2251,15 @@ Single Abstract Method) является функциональным интер
 
 Метод peek() позволяет видеть/принтовать промежуточную результаты работы Стримов. Больше всего используется для
 debugging проблем.
+
+---
+<h2>* Что делает метод reduce()</h2>
+
+В Java 8 Stream.reduce() объединяет элементы потока и создает одно значение.
+
+
+
+
 
 ---
 <h2>* Optional Api </h2>
