@@ -11,6 +11,7 @@
     * [MUTABLE VS IMMUTABLE OBJECTS](#mutable_immutable_objects)
     * [JAVA MEMORY MODEL & GARBAGE COLLECTOR](#javamemory_gc)
     * [EXCEPTION TYPES](#exceptions)
+    * [CLASS ENUM](#enums)
 * [JAVA COLLECTIONS](#java_collections)
 * [STREAM API](#stream_api)
 * [GENERICS](#generics)
@@ -1529,7 +1530,7 @@ isAlive() экземпляром того же треда
   регионы с большим кол-вом мусора. Однако отличается отсутсвием деления на young/old
 
 ---
-<h2>* Инструкменты мониторинга памяти и процессов сборки мусора</h2>
+<h2>* Инструменты мониторинга памяти и процессов сборки мусора</h2>
 
 * https://habr.com/ru/post/269621/
 
@@ -1982,7 +1983,7 @@ Iterable vs Iterator:<br>
   </tbody>
 </table>
 
-
+# <a name="enums"></a>
 
 --- 
 <h2>* Class Enum. Constant specific class body. </h2>
