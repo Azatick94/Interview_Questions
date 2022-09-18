@@ -1747,6 +1747,15 @@ throws" или обернуть выражение в try-catch блок (ина
 Непроверяемые исключения.  компилятор явно не в силах предусмотреть все возможные неправильные ситуации, которые люди могут создать своими руками :) Поэтому он не будет проверять обработку таких исключений в нашем коде. Поэтому непроверяемые. 
 
 ---
+<h2>* StackOverFlowError vs OutOfMemoryError</h2>
+
+* https://stackoverflow.com/questions/11435613/whats-the-difference-between-stackoverflowerror-and-outofmemoryerror#:~:text=StackOverflowError%20happens%20when%20you%20execute,are%20allocated%20on%20the%20heap
+<br>
+
+<b>StackOverflowError</b> возникает, когда вы выполняете слишком много методов один внутри другого (например, с бесконечной рекурсией), что ограничено размером стека.<br>
+<b>OutOfMemoryError</b> happens when the JVM runs out of space to allocate new objects, which are allocated on the heap.
+
+---
 <h2>* Может ли абстрактный класс быть final? </h2>
 Нет, не может. Ключевое слово final означает, что класс на вершине иерархии, и у него не может быть наследников. А
 абстрактный класс без наследников — это сферический конь в вакууме, так как нельзя создать экземпляр abstract class.
@@ -1849,7 +1858,7 @@ public.
 
 * https://www.baeldung.com/java-try-with-resources
 
-Try with resources был представлен в 7 версии Java. Позваляет использовать ресурсы в блоке try c гарантией того что
+Try with resources был представлен в 7 версии Java. Позволяет использовать ресурсы в блоке try c гарантией того что
 после блока try ресурсы будут закрыты. Ресурсы должны обязательно имплементировать интерфейс AutoCloseable.
 
 При использовании нескольких ресурсов в Try with resources очередность закрытия ресурсов будет следующая: Самый первый
