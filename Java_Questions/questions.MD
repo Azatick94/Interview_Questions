@@ -5,6 +5,8 @@
     * [MESSAGING](#messaging)
     * [LINUX](#linux)
     * [ALGORITHMS](#algorithms)
+      * [ALGORITHMS COMPLEXITIES](#algo_complexities)
+    * [JAVA LOGGING, SLF4J](#java_logging)
 * [CORE JAVA](#core_java)
     * [OBJECT CLASS METHODS](#object_class_methods)
     * [OOP PRINCIPLES](#oop_principles)
@@ -622,6 +624,9 @@ Rebase — еще один способ перенести изменения и
 
 
 # <a name="algorithms"></a>
+
+# <a name="algo_complexities"></a>
+
 ---
 <h2>* Алгоритмы и структуры данных.</h2>
 
@@ -779,6 +784,8 @@ Quick sort Explained.
 head) и хвост (англ. tail). Когда элемент ставится в очередь, он занимает место в её хвосте. Из очереди всегда выводится
 элемент, который находится в ее голове.
 
+
+# <a name="java_logging"></a>
 
 --- 
 <h2>* Java Logging. Что такое Slf4j. Что из себя представляет.</h2>
@@ -1753,7 +1760,7 @@ throws" или обернуть выражение в try-catch блок (ина
 <br>
 
 <b>StackOverflowError</b> возникает, когда вы выполняете слишком много методов один внутри другого (например, с бесконечной рекурсией), что ограничено размером стека.<br>
-<b>OutOfMemoryError</b> happens when the JVM runs out of space to allocate new objects, which are allocated on the heap.
+<b>OutOfMemoryError</b> происходит, когда JVM не хватает места для выделения новых объектов, которые размещаются в куче.
 
 ---
 <h2>* Может ли абстрактный класс быть final? </h2>
