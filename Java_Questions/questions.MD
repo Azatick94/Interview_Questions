@@ -726,13 +726,6 @@ Rebase — еще один способ перенести изменения и
   с результатом сравнения. Пузырьковая сортировка характеризуется низкой производительностью.<br>
   https://github.com/Azatick94/Java_Learning/blob/main/Basic_Java/src/main/java/learning_questions_answering/sorting_algorithms/Bubble_Sort.java
   <br>
-* <b>Quick Sort</b> (Быстрая сортировка). Сложность - 0(n*log(n)) <br>
-  Эффективный способ сортировки. Quick Sort - "Divide and Conquer" алгоритм (Разделяй и властвуй). Quick sort использует
-  рекурсия для сортировки.
-  <a href="https://medium.com/karuna-sehgal/a-quick-explanation-of-quick-sort-7d8e2563629b">Ссылка на статью</a><br>
-
-Quick sort Explained.
-![alt text](images/quick_sort.png)
 
 * <b>Selection Sort</b> (Сортировка методом выбора). Сложность - O(n2)
   Один из простейших способов сортировки.<br>
@@ -757,6 +750,14 @@ Quick sort Explained.
 
   ![alt text](images/insertion_sort.png)
 
+* <b>Quick Sort</b> (Быстрая сортировка). Сложность - 0(n*log(n)) <br>
+  Эффективный способ сортировки. Quick Sort - "Divide and Conquer" алгоритм (Разделяй и властвуй). Quick sort использует
+  рекурсия для сортировки.
+  <a href="https://medium.com/karuna-sehgal/a-quick-explanation-of-quick-sort-7d8e2563629b">Ссылка на статью</a><br>
+
+Quick sort Explained.
+![alt text](images/quick_sort.png)
+<br>
 
 * <b>Merger Sort</b> (Сортировка методом объединения). Сложность - O(n*logn). Алгоритм типа Разделяй и Властвуй.
   Алгоритм каждый раз разбивает массив на два массива. И так на каждом этапе разбивает древовидно до массивов с одним
@@ -780,7 +781,7 @@ Quick sort Explained.
 
 #### * Binary Search (Бинарный поиск) - O(log(n))
 
-sdfsdf
+
 
 
 
