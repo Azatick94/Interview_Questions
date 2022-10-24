@@ -4940,6 +4940,69 @@ Cucumber - это BDD FrameWork, который использует легко-
 
 # TODO
 
+
+---
+<h2>* Hamcrest Matchers</h2>
+
+* https://sysout.ru/rabota-s-hamcrest/
+* https://github.com/Azatick94/Java_Learning/tree/main/Basic_Java/src/main/java/learning_questions_answering/java_hamcrest
+
+Hamcrest - помогает писать тесты. Не надо путать его с полнофункциональными фреймворками для тестирования, такими как JUnit. Hamcrest – это всего лишь библиотека matcher-ов, которая используется в паре с JUnit или другим аналогичным фреймворком для тестирования.
+<br>
+
+
+EXAMPLES OF MATCHERS: https://github.com/Azatick94/Java_Learning/blob/main/Basic_Java/src/main/java/learning_questions_answering/java_hamcrest/HamcrestExamples.java
+
+### LOGICAL MATCHERS:
+    * allOf() - И
+    * anyOf() - ИЛИ
+    * not() - НЕ
+
+### STRING COMPARISON MATCHERS:
+    * containsString()
+    * startsWithIgnoringCase()
+    * startsWith()
+    * endsWithIgnoringCase()
+    * endsWith()
+    * equalTo()
+    * equalToIgnoringWhiteSpace()
+
+### NUMBERS COMPARISON MATCHERS:
+    * greaterThan()
+    * greaterThanOrEqualTo()
+    * lessThan()
+    * lessThanOrEqualTo()
+    * equalTo()
+
+### DOUBLES COMPARISON:
+    * closeTo() - compares value with some uncertainty
+
+### COLLECTIONS MATCHERS:
+
+    * empty()
+    * hasSize()
+    * greaterThan()
+    * hasItem()
+    * contains()
+    * containsInAnyOrder()
+
+### MAP MATCHERS:
+    * hasKey()
+    * hasValue()
+    * hasEntry()
+
+### ARRAY MATCHERS:
+    * emptyArray()
+    * arrayWithSize()
+    * arrayContaining()
+    * arrayContainingInAnyOrder()
+    * hasItemInArray()
+
+<br>
+
+## CUSTOM MATCHERS:
+* https://github.com/Azatick94/Java_Learning/blob/main/Basic_Java/src/main/java/learning_questions_answering/java_hamcrest/customMatcher/CustomMatcherTest.java
+
 ---
 <h2>* Maven - инструмент для сборки Java проектов. Вопросы. </h2>
 <h3>Основные фазы сборки: </h3>
