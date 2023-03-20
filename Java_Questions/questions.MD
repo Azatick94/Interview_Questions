@@ -25,6 +25,7 @@
     * [Data: JDBC, JPA, DATA JPA](#spring-data)
     * [Transactions](#spring-transactions)
 * [TESTING](#testing)
+* [MAVEN](#maven_introduction)
 * [DESIGN PATTERNS](#design_patterns)
 
 ---
@@ -4625,6 +4626,10 @@ JUnit предоставляет список Правил Rules как част
 проверяемой функции, в то время как дымовое направлено вширь, для покрытия тестами как можно большего функционала в
 кратчайшие сроки.
 
+--- 
+<h2>* UAT testing (User Acceptance Testing )</h2>
+
+Тип тестирования, выполняемого конечным пользователем или клиентом для проверки/принятия системы программного обеспечения перед перемещением программного приложения в производственную среду. UAT выполняется на заключительном этапе тестирования после функционального, интеграционного и системного тестирования.
 
 ---
 <h2>* TDD - Test Driver Development</h2>
@@ -4993,6 +4998,9 @@ EXAMPLES OF MATCHERS: https://github.com/Azatick94/Java_Learning/blob/main/Basic
 
 ## CUSTOM MATCHERS:
 * https://github.com/Azatick94/Java_Learning/blob/main/Basic_Java/src/main/java/learning_questions_answering/java_hamcrest/customMatcher/CustomMatcherTest.java
+
+
+# <a name="maven_introduction"></a>
 
 ---
 <h2>* Maven - инструмент для сборки Java проектов. Вопросы. </h2>
