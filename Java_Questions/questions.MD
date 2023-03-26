@@ -4989,7 +4989,7 @@ Junit предоставляет возможность писать парам�
 * https://docs.spring.io/spring-framework/docs/current/reference/html/testing.html#testing (Spring Документация)
 * https://javadoc.io/doc/org.mockito/mockito-core/latest/org/mockito/Mockito.html (Mockito документация)
 * https://github.com/Azatick94/mockito-hamcrest (пример Mock тестов)
-* https://github.com/Azatick94/Java_Learning/Basic_Java/src/test/java/learning_questions_answering/java_testing/mock_vs_stub
+* https://github.com/Azatick94/Java_Learning/tree/main/Basic_Java/src/test/java/learning_questions_answering/java_testing/mock_vs_stub
 
 ### <b>Общие аннотации для Mockito:</b>
 
