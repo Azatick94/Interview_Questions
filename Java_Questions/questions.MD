@@ -5227,6 +5227,96 @@ Cucumber - это BDD FrameWork, который использует легко-
 
 # TODO
 
+### Selenium snippets
+
+документация: 
+* https://www.selenium.dev/selenium/docs/api/java/org/openqa/selenium/package-summary.html
+* https://www.selenium.dev/selenium/docs/api/rb/Selenium/WebDriver.html
+
+#### Способы поиска элементов: 
+* By.ClassName
+* By.CssSelector
+* By.Id
+* By.Name
+* By.XPath
+
+
+#### Популярные экшены:
+* SendKeys
+* Submit
+* Click
+* dragAndDrop
+* KeyDown
+* MoveToElement
+
+
+#### Как перейти к элементу (сфокусироваться на элемент):
+
+        WebElement name = driver.findElement(By.id("name"));
+        Actions actions = new Actions(driver);
+        actions.moveToElement(name);
+
+#### Переключение на другое окно, фрейм и т.д 
+
+    driver.switchTo().window("windowName");
+    driver.switchTo().frame("frameName");
+    driver.switchTo().alert();
+
+Пример:
+
+    ArrayList<String> handles = new ArrayList<>(driver.getWindowHandles());
+    driver.switchTo().window(handles.get(1));
+    driver.switchTo().window(handles.get(0));
+
+
+Пример запуска JS кода через Selenium Webdriver
+
+    ((JavascriptExecutor) driver).executeScript() 
+    ((JavascriptExecutor) driver).executeAsyncScript() 
+
+
+
+#### CSS SELECTORS:
+
+<input id="q" class="q" name="q">
+
+этот элемент может быть найдет следующим образом используя CSS selector:
+
+    driver.findElement(By.cssSelector("input[name='q']")); - searching with tag=input and attribute name='q'
+    driver.findElement(By.cssSelector("#q")) - hash is used to locate by id
+    driver.findElement(By.cssSelector(".q")) - dot is used to locate by class
+    driver.findElement(By.cssSelector("a.btn.btn-lg[href='/checkbox']")) - searches by tag='a' and with class='btn' and class='btn-lg' and attribute href='/checkbox'
+
+
+Когда нужно найти тэг внутри другого тэга
+Example: <div id="parent"> <a id="child" href="/child">Child</a> </div>
+
+    driver.findElement(By.cssSelector("div#parent a")); - so searching by tag='div' and id='parent' and after search by tag='a'.
+
+
+#### Виды ждунов
+There are 2 types of waiters: 1) Implicit, 2) Explicit
+
+Implicit - ждет указанное количество времени, прежде чем выдать исключение «нет такого элемента». Задается как конфигурация. В случае если Selenium не может найти элемент, ждем определенное время и только потом падает с ошибкой.
+    
+    driver.manage().timeouts().implicitlyWait(TimeOut, TimeUnit.SECONDS);
+
+Explicit - ждем пока какое-то условие не станет истинным
+
+    WebDriverWait wait = new WebDriverWait(driver, 10);
+    WebElement autocompleteResult = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("pac-item")));
+
+
+### Page Object pattern in Selenium
+
+Это шаблон проектирования, используемый при автоматизированном тестировании Selenium для создания четкого разделения между кодом автоматизации и тестируемыми веб-страницами. Это помогает улучшить удобство сопровождения, читаемость и возможность повторного использования тестового кода. 
+
+* <b>Page Object Class</b>: For each web page or a component of a web page, you create a corresponding Page Object class. This class encapsulates all the elements and actions associated with that page/component.
+* <b>Element Locators</b>: In the Page Object class, you define locators for web elements using methods or properties. These locators can be CSS selectors, XPaths, IDs, etc. This encapsulates the element locators within the Page Object, making it easier to manage changes.
+* <b>Actions/Methods</b>: You define methods within the Page Object class that perform actions on the page or interact with the elements. These methods can represent user interactions like clicking a button, entering text into a field, or retrieving information from the page.
+* <b>Constructor</b>: Typically, you'll have a constructor in the Page Object class that initializes the WebDriver and ensures you're on the correct page. This constructor is often used to enforce that the Page Object represents a specific page or component.
+
+Usage in Tests: In your test scripts, you create instances of the Page Object classes and use the methods provided by those classes to interact with the web elements and perform actions.
 
 ---
 <h2>* Hamcrest Matchers</h2>
