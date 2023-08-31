@@ -5288,8 +5288,10 @@ Cucumber - это BDD FrameWork, который использует легко-
     driver.findElement(By.cssSelector("a.btn.btn-lg[href='/checkbox']")) - searches by tag='a' and with class='btn' and class='btn-lg' and attribute href='/checkbox'
 
 
-Когда нужно найти тэг внутри другого тэга
-Example: <div id="parent"> <a id="child" href="/child">Child</a> </div>
+Когда нужно найти тэг внутри другого тэга<br>
+
+    
+    <div id="parent"> <a id="child" href="/child">Child</a> </div> - пример
 
     driver.findElement(By.cssSelector("div#parent a")); - so searching by tag='div' and id='parent' and after search by tag='a'.
 
