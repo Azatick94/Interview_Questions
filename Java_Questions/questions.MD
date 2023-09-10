@@ -2253,6 +2253,73 @@ throws" или обернуть выражение в try-catch блок (ина
 <b>OutOfMemoryError</b> происходит, когда JVM не хватает места для выделения новых объектов, которые размещаются в куче.
 
 ---
+<h2>* Может ли try быть без catch</h2>
+
+* https://java2blog.com/can-we-have-try-without-catch-block-in-java/#:~:text=Yes%2C%20we%20can%20have%20try,except%20in%20case%20of%20System
+  .
+
+Может быть, если используется finally блок. Finally всегда используется, даже если выбрасывается исключение.
+Однако в этом случае, если в try блоке выбросится Exception, после try блока оставшийся код не будет работать. <b>
+Пример:</b><br>
+
+        try {
+            System.out.println("IN Try");
+            throw new ArithmeticException();
+        }
+        finally {
+            System.out.println("In Finally");
+        }
+
+        // System.out.println("Doing some stuff");
+
+<b>Результат работы скрипта: </b><br>
+
+    IN Try
+    In Finally
+    Exception in thread "main" java.lang.ArithmeticException
+      at javacode.TryWthoutCatchExample.main(TryWthoutCatchExample.java:8)
+
+---
+<h2>* Examples when Finally will not executed</h2>
+
+* Если метод System.exit() вызывается внутри блока try, он немедленно завершит работу виртуальной машины Java (JVM), и блок finally не сможет выполниться.
+* Если блок try содержит бесконечный цикл или фрагмент кода, который зависает на неопределенный срок (например, ожидая пользовательского ввода, который так и не поступает), блокfinally не будет выполнен, поскольку программа зависла и не может продолжить выполнение дальнейшего кода.
+* Если поток, выполняющий блок try, прерывается (например, с помощью Thread.interrupt()), и прерывание не обрабатывается внутри блока try, это может помешать выполнению блокаfinally.
+* Непредсказуемые события, такие как сбои питания, аппаратные сбои или сбои JVM, могут помешать выполнению блока finally, поскольку они внезапно завершают работу программы.
+
+
+--- 
+<h2>* Try with resources</h2>
+
+* https://www.baeldung.com/java-try-with-resources
+
+Try with resources был представлен в 7 версии Java. Позволяет использовать ресурсы в блоке try c гарантией того что
+после блока try ресурсы будут закрыты. Ресурсы должны обязательно имплементировать интерфейс AutoCloseable.
+
+При использовании нескольких ресурсов в Try with resources очередность закрытия ресурсов будет следующая: Самый первый
+ресурс закроется в самом конце.
+
+Пример:
+
+      try (Scanner scanner = new Scanner(new File("test.txt"))) { <br>
+        while (scanner.hasNext()) {<br>
+        System.out.println(scanner.nextLine());<br>
+      }<br>
+      } catch (FileNotFoundException fnfe) {<br>
+        fnfe.printStackTrace();<br>
+      }
+
+Пример создания своего ресурса (для этого необходимо заимплементить AutoCloseable интерфейс и переопределить метод
+close):
+
+    public class MyResource implements AutoCloseable {
+        @Override
+        public void close() throws Exception {
+            System.out.println("Closed MyResource");
+        }
+    }
+
+---
 <h2>* Может ли абстрактный класс быть final? </h2>
 Нет, не может. Ключевое слово final означает, что класс на вершине иерархии, и у него не может быть наследников. А
 абстрактный класс без наследников — это сферический конь в вакууме, так как нельзя создать экземпляр abstract class.
@@ -2321,74 +2388,6 @@ public.
 #### Основные особенности статического класса в сравнении с нестатическим вложенным классом:
 * Статический вложенный класс может быть создан без создания экземпляра его внешнего класса.
 * Внутренние классы могут обращаться как к статическим, так и к нестатическим членам внешнего класса. Статический класс может получить доступ только к статическим членам внешнего класса.
-
-
----
-<h2>* Может ли try быть без catch</h2>
-
-* https://java2blog.com/can-we-have-try-without-catch-block-in-java/#:~:text=Yes%2C%20we%20can%20have%20try,except%20in%20case%20of%20System
-  .
-
-Может быть, если используется finally блок. Finally всегда используется, даже если выбрасывается исключение.
-Однако в этом случае, если в try блоке выбросится Exception, после try блока оставшийся код не будет работать. <b>
-Пример:</b><br>
-
-        try {
-            System.out.println("IN Try");
-            throw new ArithmeticException();
-        }
-        finally {
-            System.out.println("In Finally");
-        }
-
-        // System.out.println("Doing some stuff");
-
-<b>Результат работы скрипта: </b><br>
-
-    IN Try
-    In Finally
-    Exception in thread "main" java.lang.ArithmeticException
-      at javacode.TryWthoutCatchExample.main(TryWthoutCatchExample.java:8)
-
----
-<h2>* Examples when Finally will not executed</h2>
-
-* Если метод System.exit() вызывается внутри блока try, он немедленно завершит работу виртуальной машины Java (JVM), и блок finally не сможет выполниться.
-* Если блок try содержит бесконечный цикл или фрагмент кода, который зависает на неопределенный срок (например, ожидая пользовательского ввода, который так и не поступает), блокfinally не будет выполнен, поскольку программа зависла и не может продолжить выполнение дальнейшего кода.
-* Если поток, выполняющий блок try, прерывается (например, с помощью Thread.interrupt()), и прерывание не обрабатывается внутри блока try, это может помешать выполнению блокаfinally.
-* Непредсказуемые события, такие как сбои питания, аппаратные сбои или сбои JVM, могут помешать выполнению блока finally, поскольку они внезапно завершают работу программы.
-
-
---- 
-<h2>* Try with resources</h2>
-
-* https://www.baeldung.com/java-try-with-resources
-
-Try with resources был представлен в 7 версии Java. Позволяет использовать ресурсы в блоке try c гарантией того что
-после блока try ресурсы будут закрыты. Ресурсы должны обязательно имплементировать интерфейс AutoCloseable.
-
-При использовании нескольких ресурсов в Try with resources очередность закрытия ресурсов будет следующая: Самый первый
-ресурс закроется в самом конце.
-
-Пример:
-
-      try (Scanner scanner = new Scanner(new File("test.txt"))) { <br>
-        while (scanner.hasNext()) {<br>
-        System.out.println(scanner.nextLine());<br>
-      }<br>
-      } catch (FileNotFoundException fnfe) {<br>
-        fnfe.printStackTrace();<br>
-      }
-
-Пример создания своего ресурса (для этого необходимо заимплементить AutoCloseable интерфейс и переопределить метод
-close):
-
-    public class MyResource implements AutoCloseable {
-        @Override
-        public void close() throws Exception {
-            System.out.println("Closed MyResource");
-        }
-    }
 
 ---
 <h2>* Autoboxing. Что это? Особенности Autoboxing. </h2>
