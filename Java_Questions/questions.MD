@@ -5477,9 +5477,7 @@ Cucumber - это BDD FrameWork, который использует легко-
 
 
 
-#### CSS SELECTORS:
-
-<input id="q" class="q" name="q">
+#### CSS SELECTORS: <input id="q" class="q" name="q">
 
 этот элемент может быть найдет следующим образом используя CSS selector:
 
@@ -5487,6 +5485,11 @@ Cucumber - это BDD FrameWork, который использует легко-
     driver.findElement(By.cssSelector("#q")) - hash is used to locate by id
     driver.findElement(By.cssSelector(".q")) - dot is used to locate by class
     driver.findElement(By.cssSelector("a.btn.btn-lg[href='/checkbox']")) - searches by tag='a' and with class='btn' and class='btn-lg' and attribute href='/checkbox'
+
+
+Также можно искать одновременно по name и id.
+
+    WebElement button = driver.findElement(new ByIdOrName("resend-select"));
 
 
 Когда нужно найти тэг внутри другого тэга<br>
@@ -5508,6 +5511,43 @@ Explicit - ждем пока какое-то условие не станет и
 
     WebDriverWait wait = new WebDriverWait(driver, 10);
     WebElement autocompleteResult = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("pac-item")));
+
+#### Select class для работы с выпадающим меню
+
+Класс Select в Selenium на Java используется для работы с выпадающими меню (также известными как элементы <select>) и выполнения различных операций с ними, таких как выбор опций, снятие выбора опций и получение выбранных опций. Класс Select предоставляет удобный способ взаимодействия с выпадающими списками и является частью библиотеки Selenium WebDriver.
+<br>
+
+Вот некоторые общие операции, которые можно выполнять с помощью класса Select в Selenium на Java:<br>
+
+1. Выбор опции по видимому тексту:
+
+    Select dropdown = new Select(driver.findElement(By.id("myDropdown")));
+    dropdown.selectByVisibleText("Опция 1");
+
+2. Выбор опции по индексу:
+
+    Select dropdown = new Select(driver.findElement(By.id("myDropdown")));
+    dropdown.selectByIndex(1);
+
+3. Выбор опции по значению:
+
+    Select dropdown = new Select(driver.findElement(By.id("myDropdown")));
+    dropdown.selectByValue("значение_опции");
+
+4. Снятие выбора с опции: Если выпадающий список позволяет выбирать несколько опций (имеет атрибут multiple), вы можете снимать выбор с опции по индексу, значению или видимому тексту:
+
+    // Снятие выбора по индексу
+    dropdown.deselectByIndex(1);
+
+    // Снятие выбора по значению
+    dropdown.deselectByValue("значение_опции");
+
+    // Снятие выбора по видимому тексту
+    dropdown.deselectByVisibleText("Опция 1");
+
+<br>
+и т.д.
+
 
 
 ### Page Object pattern in Selenium
