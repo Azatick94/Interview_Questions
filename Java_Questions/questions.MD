@@ -5500,6 +5500,15 @@ Cucumber - это BDD FrameWork, который использует легко-
 
     driver.findElement(By.cssSelector("div#parent a")); - so searching by tag='div' and id='parent' and after search by tag='a'.
 
+#### new ByChained() - как альтернатива CSS селекторам
+
+В этом примере сначала ищет по "name", далее ищет по названию класса "message". 
+
+
+    List<WebElement> allMessages = driver.findElements(
+                                                    new ByChained(By.name("list"),
+                                                            By.className("message")));
+
 
 #### Виды ждунов
 There are 2 types of waiters: 1) Implicit, 2) Explicit
