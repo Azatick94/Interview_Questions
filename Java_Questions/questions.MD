@@ -5520,22 +5520,22 @@ Explicit - ждем пока какое-то условие не станет и
 
 Вот некоторые общие операции, которые можно выполнять с помощью класса Select в Selenium на Java:<br>
 
-* Выбор опции по видимому тексту:
+* #### Выбор опции по видимому тексту:
 
     Select dropdown = new Select(driver.findElement(By.id("myDropdown")));
     dropdown.selectByVisibleText("Опция 1");
 
-* Выбор опции по индексу:
+* #### Выбор опции по индексу:
 
     Select dropdown = new Select(driver.findElement(By.id("myDropdown")));
     dropdown.selectByIndex(1);
 
-* Выбор опции по значению:
+* #### Выбор опции по значению:
 
     Select dropdown = new Select(driver.findElement(By.id("myDropdown")));
     dropdown.selectByValue("значение_опции");
 
-* Снятие выбора с опции: Если выпадающий список позволяет выбирать несколько опций (имеет атрибут multiple), вы можете снимать выбор с опции по индексу, значению или видимому тексту:
+* #### Снятие выбора с опции: Если выпадающий список позволяет выбирать несколько опций (имеет атрибут multiple), вы можете снимать выбор с опции по индексу, значению или видимому тексту:
 
     // Снятие выбора по индексу
     dropdown.deselectByIndex(1);
@@ -5545,9 +5545,8 @@ Explicit - ждем пока какое-то условие не станет и
 
     // Снятие выбора по видимому тексту
     dropdown.deselectByVisibleText("Опция 1");
-<br>
+
 и т.д.
-<br>
 
 ### Page Object pattern in Selenium
 
