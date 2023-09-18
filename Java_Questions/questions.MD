@@ -5477,7 +5477,7 @@ Cucumber - это BDD FrameWork, который использует легко-
 
 
 
-#### CSS SELECTORS: 
+### * CSS SELECTORS: 
 * &lt;input id="q" class="q" name="q"&gt;
 
 этот элемент может быть найдет следующим образом используя CSS selector:
@@ -5510,7 +5510,7 @@ Cucumber - это BDD FrameWork, который использует легко-
                                                             By.className("message")));
 
 
-#### Виды ждунов
+### * Виды ждунов
 There are 2 types of waiters: 1) Implicit, 2) Explicit
 
 Implicit - ждет указанное количество времени, прежде чем выдать исключение «нет такого элемента». Задается как конфигурация. В случае если Selenium не может найти элемент, ждем определенное время и только потом падает с ошибкой.
@@ -5522,7 +5522,21 @@ Explicit - ждем пока какое-то условие не станет и
     WebDriverWait wait = new WebDriverWait(driver, 10);
     WebElement autocompleteResult = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("pac-item")));
 
-### Select class для работы с выпадающим меню
+
+#### * Также существует еще <b>FluentWait</b><br>
+FluentWait — это функция Selenium WebDriver, которая позволяет указать максимальное время ожидания выполнения определенного условия, а также частоту проверки этого условия. Он обеспечивает более гибкий и быстрый способ ожидания элементов или условий по сравнению с традиционным ожиданием. 
+
+Пример.
+
+        FluentWait<WebDriver> fluentWait = new FluentWait<>(driver)
+                .withTimeout(Duration.ofSeconds(10))
+                .pollingEvery(Duration.ofMillis(100))
+                .ignoring(NoSuchElementException.class);
+        WebElement message = fluentWait.until(ExpectedConditions.presenceOfElementLocated(By.id("message")));
+        Assertions.assertEquals("Received message: selected 20", message.getText());
+
+
+### * Select class для работы с выпадающим меню
 <br>
 Класс Select в Selenium на Java используется для работы с выпадающими меню (также известными как элементы <b>select</b>) и выполнения различных операций с ними, таких как выбор опций, снятие выбора опций и получение выбранных опций. Класс Select предоставляет удобный способ взаимодействия с выпадающими списками и является частью библиотеки Selenium WebDriver.
 <br>
@@ -5557,7 +5571,7 @@ Explicit - ждем пока какое-то условие не станет и
 
 и т.д.
 
-### Page Object pattern in Selenium
+### * Page Object pattern in Selenium
 
 Это шаблон проектирования, используемый при автоматизированном тестировании Selenium для создания четкого разделения между кодом автоматизации и тестируемыми веб-страницами. Это помогает улучшить удобство сопровождения, читаемость и возможность повторного использования тестового кода. 
 
@@ -5567,6 +5581,58 @@ Explicit - ждем пока какое-то условие не станет и
 * <b>Constructor</b>: Typically, you'll have a constructor in the Page Object class that initializes the WebDriver and ensures you're on the correct page. This constructor is often used to enforce that the Page Object represents a specific page or component.
 
 Usage in Tests: In your test scripts, you create instances of the Page Object classes and use the methods provided by those classes to interact with the web elements and perform actions.
+
+
+### * Аннотации в Selenium Page Object
+
+Аннотации в Selenium в сочетании с паттерном Page Object используются для идентификации элементов на веб-странице и связывания их с полями класса Page Object. Это упрощает и улучшает читаемость автоматизированных тестов.
+
+Вот некоторые из наиболее часто используемых аннотаций в Selenium Page Object:
+
+* <b>@FindBy</b>: Эта аннотация используется для поиска элементов на веб-странице. Вы можете использовать различные локаторы, такие как id, name, css, xpath, className и другие.
+
+```java
+@FindBy(id = "username")
+private WebElement usernameInput;
+```
+
+* <b>@FindAll</b> и <b>@FindBys</b>: Эти аннотации используются для выполнения сложных локаторов, включая несколько условий. @FindAll находит элементы, которые соответствуют всем условиям, а @FindBys находит элементы, которые соответствуют хотя бы одному из условий.
+
+```java
+@FindAll({
+    @FindBy(id = "username"),
+    @FindBy(css = "input[type='text']")
+})
+private List<WebElement> usernameInputs;
+
+@FindBys({
+    @FindBy(className = "login-form"),
+    @FindBy(css = "input[type='text']")
+})
+private WebElement usernameInputInLoginForm;
+```
+* <b>@CacheLookup</b>: Эта аннотация позволяет кешировать найденные элементы, чтобы ускорить последующий доступ к ним. Однако это может привести к проблемам, если DOM меняется после первого поиска элемента.
+
+```java
+@CacheLookup
+@FindBy(id = "username")
+private WebElement usernameInput;
+```
+
+* <b>@Name, @Id, @TagName, @LinkText, @PartialLinkText, @CssSelector, @ClassName</b>: Эти аннотации используются для поиска элементов по разным локаторам, и они имеют более краткую форму записи по сравнению с @FindBy.
+
+```java
+@Name("q")
+private WebElement searchBox;
+
+@TagName("input")
+private List<WebElement> inputElements;
+
+@CssSelector(".footer")
+private WebElement footerElement;
+
+```
+#### Используйте аннотации в сочетании с Page Object для упрощения и структурирования автоматизированных тестов в Selenium. Это помогает сделать код более читаемым и поддерживаемым !
 
 ---
 <h2>* Hamcrest Matchers</h2>
