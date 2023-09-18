@@ -5591,14 +5591,14 @@ Usage in Tests: In your test scripts, you create instances of the Page Object cl
 
 * <b>@FindBy</b>: Эта аннотация используется для поиска элементов на веб-странице. Вы можете использовать различные локаторы, такие как id, name, css, xpath, className и другие.
 
-```java
+``` ava
 @FindBy(id = "username")
 private WebElement usernameInput;
 ```
 
 * <b>@FindAll</b> и <b>@FindBys</b>: Эти аннотации используются для выполнения сложных локаторов, включая несколько условий. @FindAll находит элементы, которые соответствуют всем условиям, а @FindBys находит элементы, которые соответствуют хотя бы одному из условий.
 
-```java
+``` java
 @FindAll({
     @FindBy(id = "username"),
     @FindBy(css = "input[type='text']")
@@ -5633,6 +5633,54 @@ private WebElement footerElement;
 
 ```
 #### Используйте аннотации в сочетании с Page Object для упрощения и структурирования автоматизированных тестов в Selenium. Это помогает сделать код более читаемым и поддерживаемым !
+
+### * EventFiringWebDriver
+
+EventFiringWebDriver в Selenium - это обертка вокруг обычного WebDriver, которая позволяет добавлять пользовательские обработчики событий для автоматического выполнения дополнительных действий во время выполнения тестов. Это полезно, когда вы хотите отслеживать и регистрировать события, такие как клики на элементы, загрузка страниц, ошибки и другие, для более подробного анализа выполнения тестов.
+
+<b>Практический пример</b> - делать скриншоты в процессе выполнения тестовых шагов. 
+
+
+Пример:
+
+``` java
+
+public class EventListenerExample {
+
+  private static WebDriver driver;
+
+    public static void main(String[] args) {
+        WebDriverManager.chromedriver().setup();
+        WebDriver driver = new ChromeDriver();
+        EventFiringWebDriver eventDriver = new EventFiringWebDriver(driver);
+
+        // Создайте экземпляр пользовательского слушателя событий
+        MyEventListener eventListener = new MyEventListener();
+        // Зарегистрируйте слушателя событий с EventFiringWebDriver
+        eventDriver.register(eventListener);
+
+        // Откройте веб-страницу
+        eventDriver.get("https://www.example.com");
+
+        // Найдите элемент и выполните клик
+        WebElement element = eventDriver.findElement(By.linkText("Click Me"));
+        element.click();
+
+        // Закройте браузер
+        eventDriver.quit();
+    }
+
+    // Пользовательский слушатель событий
+    public static class MyEventListener extends AbstractWebDriverEventListener {
+        @Override
+        public void afterClickOn(WebElement element, WebDriver driver) {
+            // Логируйте информацию о клике на элементе
+            System.out.println("Clicked on element with text: " + element.getText());
+        }
+    }
+}
+
+```
 
 ---
 <h2>* Hamcrest Matchers</h2>
