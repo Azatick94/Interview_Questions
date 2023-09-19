@@ -36,6 +36,10 @@
     * [CUCUMBER, BDD](#cucumber)
     * [MOCK VS STUB](#mock_vs_stub)
     * [SELENIUM, SELENIDE](#selenium)
+      * [SELECTORS](#selectors)
+      * [SELENIUM WAITERS](#selenium_waiters)
+      * [SELENIUM PAGE OBJECT PATTERN](#selenium_page_object)
+      * [EventFiringWebDriver](#eventfiringwebdriver)
 * [MAVEN](#maven_introduction)
 * [DESIGN PATTERNS](#design_patterns)
 
@@ -5476,7 +5480,7 @@ Cucumber - это BDD FrameWork, который использует легко-
     ((JavascriptExecutor) driver).executeAsyncScript() 
 
 
-
+# <a name="selectors"></a>
 ### * CSS SELECTORS: 
 * &lt;input id="q" class="q" name="q"&gt;
 
@@ -5509,7 +5513,7 @@ Cucumber - это BDD FrameWork, который использует легко-
                                                     new ByChained(By.name("list"),
                                                             By.className("message")));
 
-
+# <a name="selenium_waiters"></a>
 ### * Виды ждунов
 There are 2 types of waiters: 1) Implicit, 2) Explicit
 
@@ -5571,6 +5575,7 @@ FluentWait — это функция Selenium WebDriver, которая позв
 
 и т.д.
 
+# <a name="selenium_page_object"></a>
 ### * Page Object pattern in Selenium
 
 Это шаблон проектирования, используемый при автоматизированном тестировании Selenium для создания четкого разделения между кодом автоматизации и тестируемыми веб-страницами. Это помогает улучшить удобство сопровождения, читаемость и возможность повторного использования тестового кода. 
@@ -5634,6 +5639,7 @@ private WebElement footerElement;
 ```
 #### Используйте аннотации в сочетании с Page Object для упрощения и структурирования автоматизированных тестов в Selenium. Это помогает сделать код более читаемым и поддерживаемым !
 
+# <a name="eventfiringwebdriver"></a>
 ### * EventFiringWebDriver
 
 EventFiringWebDriver в Selenium - это обертка вокруг обычного WebDriver, которая позволяет добавлять пользовательские обработчики событий для автоматического выполнения дополнительных действий во время выполнения тестов. Это полезно, когда вы хотите отслеживать и регистрировать события, такие как клики на элементы, загрузка страниц, ошибки и другие, для более подробного анализа выполнения тестов.
