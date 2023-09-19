@@ -27,10 +27,10 @@
     * [Transactions](#spring-transactions)
     * [Microservices](#microservices)
 * [TESTING](#testing)
-    * [Junit](#junit)
     * [TYPES OF TESTING](#types_of_testing)
     * [FUNCTIONAL, NONFUNCTIONAL TESTING](#functional_nonfunctional)
     * [TEST DRIVEN DEVELOPMENT, BEHAVIOR DRIVEN DEVELOPMENT, DATA DRIVEN TESTING](#tdd_bdd_ddt)
+    * [Junit](#junit)
     * [MOCK, MOCKITO](#mockito)
     * [WIREMOCK, EXTERNAL SERVICES TESTING](#wiremock)
     * [CUCUMBER, BDD](#cucumber)
@@ -4899,95 +4899,9 @@ post_comment и несколько запросов в таблицу post чт�
 * https://martinfowler.com/articles/practical-test-pyramid.html (оригинал на английском)
 
 
-# <a name="junit"></a>
----
-<h2>* Rule в Junit, особенности (JUnit4) </h2>
-
-* https://www.baeldung.com/junit-4-rules <br>
-
-Эта аннотация отсутствует в Junit5. В JUnit 5 (JUnit Jupiter) эквивалентом @Rule в JUnit 4 является интерфейс <b>@TestRule</b> и аннотация <b>@RegisterExtension</b>. Однако JUnit 5 предлагает более гибкий и модульный подход к добавлению поведения в тесты с использованием расширений.
-
-Аннотацию @Rule в JUnit можно рассматривать как шаблон декоратора. В шаблонах проектирования программного обеспечения шаблон декоратора используется для динамического закрепления дополнительных обязанностей за объектом. Он предоставляет гибкую альтернативу подклассам для расширения функциональности.
-Точно так же аннотация @Rule в JUnit позволяет разработчикам динамически назначать дополнительные обязанности или поведение тестовому методу или тестовому классу, не изменяя код самого тестового метода или класса. Это способ добавления поведения к выполнению теста без изменения кода теста.
-
-JUnit предоставляет список Правил Rules как часть пакета org.junit.rules. <br>
-
-Когда вы используете аннотацию @Rule, вы определяете класс, реализующий интерфейс <b>TestRule</b>. Этот класс обеспечивает дополнительное поведение, которое вы хотите применить к тестовому методу или классу. Затем аннотация @Rule динамически прикрепляет это поведение к тестовому методу или классу.
-
-
-Пример Кода в котором используется @Rule для добавления функционала расчета времени выполнения теста: <br>
-
-    public class MyTest {
-        @Rule
-        public Stopwatch stopwatch = new Stopwatch();
-        
-        @Test
-        public void myTest() {
-            // test code here
-        }
-    }
-
-    public class Stopwatch implements TestRule {
-        
-        public Statement apply(Statement base, Description description) {
-            return new Statement() {
-                @Override
-                public void evaluate() throws Throwable {
-                    long startTime = System.currentTimeMillis();
-                    try {
-                        base.evaluate();
-                    } finally {
-                        long endTime = System.currentTimeMillis();
-                        System.out.println(description.getDisplayName() + " took " + (endTime - startTime) + " ms");
-                    }
-                }
-            };
-        }
-    }
-
-
-### <b>Общие аннотации и сравнение Junit4 vs Junit5:</b>
-
-| Annotation        | JUnit 4                                                         | JUnit 5 (JUnit Jupiter)                                       | Explanation                                                                                                                                                                           |
-| ----------------- | --------------------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `@Test`           | Used to denote a test method.                                   | Used to denote a test method.                                | Marks a method as a test method. Test methods are executed to verify that the code under test behaves as expected.                                                                |
-| `@BeforeClass`    | Run once before all test methods in a test class.              | Replaced by `@BeforeAll` in JUnit 5.                         | Executes a method before all test methods in a test class. Typically used for expensive setup tasks.                                                                            |
-| `@AfterClass`     | Run once after all test methods in a test class.               | Replaced by `@AfterAll` in JUnit 5.                          | Executes a method after all test methods in a test class. Typically used for cleanup tasks.                                                                                   |
-| `@Before`         | Run before each test method.                                    | Replaced by `@BeforeEach` in JUnit 5.                       | Executes a method before each test method. Used for common setup tasks required for individual test methods.                                                                  |
-| `@After`          | Run after each test method.                                     | Replaced by `@AfterEach` in JUnit 5.                        | Executes a method after each test method. Used for common cleanup tasks after individual test methods.                                                                        |
-| `@Ignore`         | Marks a test method or class as ignored (skipped).             | Replaced by `@Disabled` in JUnit 5.                        | Temporarily disables the execution of a test method or class. Useful for excluding tests that are currently failing or need further work.                                    |
-| `@Category`       | Categorizes test methods or classes for selective execution.   | Not available in JUnit 5.                                   | Allows you to categorize tests and then run only specific categories of tests. Useful for selective test execution.                                                           |
-| `@ExtendWith`     | Not used in JUnit 4.                                           | Used to apply extensions in JUnit 5.                        | Allows you to apply custom extensions to tests or test classes. Extensions provide additional functionality or behavior to tests.                                             |
-| `@DataPoint`      | Used in parameterized tests to define data points.             | Not available in JUnit 5.                                   | Used in JUnit 4's parameterized tests to specify data points that are used as inputs for parameterized test methods.                                                        |
-| `@Theory`         | Used to define theory-based tests with hypotheses and data.    | Not available in JUnit 5.                                   | Used in JUnit 4's theory-based tests to specify hypotheses and data points for theory-based testing.                                                                          |
-| `@Rule`           | Allows you to define and apply custom test rules.              | Not used in JUnit 5.                                        | Used in JUnit 4 to apply custom rules to tests, which can modify test behavior or provide additional functionality.                                                             |
-| `@Parameters`     | Used in parameterized tests to define test input parameters.   | Not available in JUnit 5.                                   | Used in JUnit 4's parameterized tests to provide input parameters for test methods.                                                                                             |
-| `@Parameterized`  | Marks a test class as a parameterized test class.              | Replaced by `@ParameterizedTest` in JUnit 5.                | In JUnit 4, it marks a class as a parameterized test class. In JUnit 5, `@ParameterizedTest` is used to declare parameterized test methods.                                       |
-| `@DisplayName`    | Not available in JUnit 4.                                      | Used to provide a custom display name for tests in JUnit 5.  | Allows you to specify a more descriptive and readable name for test methods, enhancing test report readability.                                                           |
-| `@RepeatedTest`   | Not available in JUnit 4.                                      | Used to repeat a test method multiple times in JUnit 5.     | Allows you to run a test method multiple times with the same or different inputs, enhancing test coverage and robustness.                                                      |
-| `@Nested`         | Not available in JUnit 4.                                      | Used to create nested test classes in JUnit 5.              | Allows you to organize tests into nested classes, enhancing test structure and reducing code duplication.                                                                   |
-| `@RunWith`        | Used to specify a custom test runner class.                      | Replaced by JUnit Jupiter's built-in extension model in JUnit 5. | Specifies a custom test runner class that should be used to run the tests in the test class. JUnit 5 uses a different extension model for similar functionality.              |
-
-
-### <b>Основные Assertions для Junit5</b>
-
-* https://junit.org/junit5/docs/5.0.1/api/org/junit/jupiter/api/Assertions.html
-
-    * assertAll - запуск нескольких тестов одновременно
-    * assertArrayEquals
-    * assertEquals
-    * assertDoesNotThrow
-    * assertFalse
-    * assertNotEquals
-    * assertNull
-    * assertThrows - Executable should be supplied with lambda
-    * assertTimeOut - Executable should be supplied with lambda
-    * assertTrue
-
 # <a name="types_of_testing"></a>
 ---
-<h2>* Какие бывают тестирования? Типы, отличия и т.д?</h2>
-
+<h2>* Какие типы тестирования бывают? Типы, отличия и т.д?</h2>
 
 <p><a href="https://habr.com/ru/post/358950/">Ссылка на отличную статью про тестирование</a></p>
 
@@ -5047,7 +4961,6 @@ JUnit предоставляет список Правил Rules как част
 * Compatibility testing - Проверка работоспособности приложения на разных платформах, устройствах и браузерах.
 * Scalability testing - Тестирование способности приложения обрабатывать растущее число пользователей и данных.
 
-
 ---
 <h2>* Smoke testing. Что это?</h2>
 
@@ -5082,6 +4995,11 @@ JUnit предоставляет список Правил Rules как част
 <h2>* UAT testing (User Acceptance Testing )</h2>
 
 Тип тестирования, выполняемого конечным пользователем или клиентом для проверки/принятия системы программного обеспечения перед перемещением программного приложения в производственную среду. UAT выполняется на заключительном этапе тестирования после функционального, интеграционного и системного тестирования.
+
+---
+<h2>Negative testing</h2>
+
+Негативное тестирование, также известное как "тестирование на ошибки" или "тестирование неудачных сценариев", является методикой тестирования программного обеспечения, при которой тестировщики специально проверяют систему, приложение или компонент с недопустимыми, неожиданными или некорректными входными данными, чтобы убедиться, что она адекватно обрабатывает такие ситуации. Целью негативного тестирования является проверка того, что программное обеспечение ведет себя корректно и восстанавливается надежно в нестандартных ситуациях, таких как ошибки, недопустимые входные данные или исключительные обстоятельства.
 
 # <a name="tdd_bdd_ddt"></a>
 ---
@@ -5233,6 +5151,89 @@ Junit предоставляет возможность писать парам�
         );
     }
 
+# <a name="junit"></a>
+---
+<h2>* Rule в Junit, особенности (JUnit4) </h2>
+
+* https://www.baeldung.com/junit-4-rules <br>
+
+Эта аннотация отсутствует в Junit5. В JUnit 5 (JUnit Jupiter) эквивалентом @Rule в JUnit 4 является интерфейс <b>@TestRule</b> и аннотация <b>@RegisterExtension</b>. Однако JUnit 5 предлагает более гибкий и модульный подход к добавлению поведения в тесты с использованием расширений.
+
+Аннотацию @Rule в JUnit можно рассматривать как шаблон декоратора. В шаблонах проектирования программного обеспечения шаблон декоратора используется для динамического закрепления дополнительных обязанностей за объектом. Он предоставляет гибкую альтернативу подклассам для расширения функциональности.
+Точно так же аннотация @Rule в JUnit позволяет разработчикам динамически назначать дополнительные обязанности или поведение тестовому методу или тестовому классу, не изменяя код самого тестового метода или класса. Это способ добавления поведения к выполнению теста без изменения кода теста.
+
+JUnit предоставляет список Правил Rules как часть пакета org.junit.rules. <br>
+
+Когда вы используете аннотацию @Rule, вы определяете класс, реализующий интерфейс <b>TestRule</b>. Этот класс обеспечивает дополнительное поведение, которое вы хотите применить к тестовому методу или классу. Затем аннотация @Rule динамически прикрепляет это поведение к тестовому методу или классу.
+
+
+Пример Кода в котором используется @Rule для добавления функционала расчета времени выполнения теста: <br>
+
+    public class MyTest {
+        @Rule
+        public Stopwatch stopwatch = new Stopwatch();
+        
+        @Test
+        public void myTest() {
+            // test code here
+        }
+    }
+
+    public class Stopwatch implements TestRule {
+        
+        public Statement apply(Statement base, Description description) {
+            return new Statement() {
+                @Override
+                public void evaluate() throws Throwable {
+                    long startTime = System.currentTimeMillis();
+                    try {
+                        base.evaluate();
+                    } finally {
+                        long endTime = System.currentTimeMillis();
+                        System.out.println(description.getDisplayName() + " took " + (endTime - startTime) + " ms");
+                    }
+                }
+            };
+        }
+    }
+
+
+### <b>Общие аннотации и сравнение Junit4 vs Junit5:</b>
+
+| Annotation        | JUnit 4                                                         | JUnit 5 (JUnit Jupiter)                                       | Explanation                                                                                                                                                                           |
+| ----------------- | --------------------------------------------------------------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `@Test`           | Used to denote a test method.                                   | Used to denote a test method.                                | Marks a method as a test method. Test methods are executed to verify that the code under test behaves as expected.                                                                |
+| `@BeforeClass`    | Run once before all test methods in a test class.              | Replaced by `@BeforeAll` in JUnit 5.                         | Executes a method before all test methods in a test class. Typically used for expensive setup tasks.                                                                            |
+| `@AfterClass`     | Run once after all test methods in a test class.               | Replaced by `@AfterAll` in JUnit 5.                          | Executes a method after all test methods in a test class. Typically used for cleanup tasks.                                                                                   |
+| `@Before`         | Run before each test method.                                    | Replaced by `@BeforeEach` in JUnit 5.                       | Executes a method before each test method. Used for common setup tasks required for individual test methods.                                                                  |
+| `@After`          | Run after each test method.                                     | Replaced by `@AfterEach` in JUnit 5.                        | Executes a method after each test method. Used for common cleanup tasks after individual test methods.                                                                        |
+| `@Ignore`         | Marks a test method or class as ignored (skipped).             | Replaced by `@Disabled` in JUnit 5.                        | Temporarily disables the execution of a test method or class. Useful for excluding tests that are currently failing or need further work.                                    |
+| `@Category`       | Categorizes test methods or classes for selective execution.   | Not available in JUnit 5.                                   | Allows you to categorize tests and then run only specific categories of tests. Useful for selective test execution.                                                           |
+| `@ExtendWith`     | Not used in JUnit 4.                                           | Used to apply extensions in JUnit 5.                        | Allows you to apply custom extensions to tests or test classes. Extensions provide additional functionality or behavior to tests.                                             |
+| `@DataPoint`      | Used in parameterized tests to define data points.             | Not available in JUnit 5.                                   | Used in JUnit 4's parameterized tests to specify data points that are used as inputs for parameterized test methods.                                                        |
+| `@Theory`         | Used to define theory-based tests with hypotheses and data.    | Not available in JUnit 5.                                   | Used in JUnit 4's theory-based tests to specify hypotheses and data points for theory-based testing.                                                                          |
+| `@Rule`           | Allows you to define and apply custom test rules.              | Not used in JUnit 5.                                        | Used in JUnit 4 to apply custom rules to tests, which can modify test behavior or provide additional functionality.                                                             |
+| `@Parameters`     | Used in parameterized tests to define test input parameters.   | Not available in JUnit 5.                                   | Used in JUnit 4's parameterized tests to provide input parameters for test methods.                                                                                             |
+| `@Parameterized`  | Marks a test class as a parameterized test class.              | Replaced by `@ParameterizedTest` in JUnit 5.                | In JUnit 4, it marks a class as a parameterized test class. In JUnit 5, `@ParameterizedTest` is used to declare parameterized test methods.                                       |
+| `@DisplayName`    | Not available in JUnit 4.                                      | Used to provide a custom display name for tests in JUnit 5.  | Allows you to specify a more descriptive and readable name for test methods, enhancing test report readability.                                                           |
+| `@RepeatedTest`   | Not available in JUnit 4.                                      | Used to repeat a test method multiple times in JUnit 5.     | Allows you to run a test method multiple times with the same or different inputs, enhancing test coverage and robustness.                                                      |
+| `@Nested`         | Not available in JUnit 4.                                      | Used to create nested test classes in JUnit 5.              | Allows you to organize tests into nested classes, enhancing test structure and reducing code duplication.                                                                   |
+| `@RunWith`        | Used to specify a custom test runner class.                      | Replaced by JUnit Jupiter's built-in extension model in JUnit 5. | Specifies a custom test runner class that should be used to run the tests in the test class. JUnit 5 uses a different extension model for similar functionality.              |
+
+### <b>Основные Assertions для Junit5</b>
+
+* https://junit.org/junit5/docs/5.0.1/api/org/junit/jupiter/api/Assertions.html
+
+    * assertAll - запуск нескольких тестов одновременно
+    * assertArrayEquals
+    * assertEquals
+    * assertDoesNotThrow
+    * assertFalse
+    * assertNotEquals
+    * assertNull
+    * assertThrows - Executable should be supplied with lambda
+    * assertTimeOut - Executable should be supplied with lambda
+    * assertTrue
 
 # <a name="mockito"></a>
 ---
