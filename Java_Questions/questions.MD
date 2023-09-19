@@ -5683,6 +5683,40 @@ private WebElement footerElement;
 ```
 #### Используйте аннотации в сочетании с Page Object для упрощения и структурирования автоматизированных тестов в Selenium. Это помогает сделать код более читаемым и поддерживаемым !
 
+#### * Пример Page Object-а с аннотациями
+
+``` java
+
+public class LoginPage {
+    private WebDriver driver;
+
+    @FindBy(id = "username")
+    private WebElement usernameInput;
+
+    @FindBy(id = "password")
+    private WebElement passwordInput;
+
+    @FindBy(id = "loginButton")
+    private WebElement loginButton;
+
+    // Constructor to initialize the WebDriver and PageFactory
+    public LoginPage(WebDriver driver) {
+        this.driver = driver;
+        PageFactory.initElements(driver, this); // 
+    }
+
+    // Method to perform login
+    public void login(String username, String password) {
+        usernameInput.sendKeys(username);
+        passwordInput.sendKeys(password);
+        loginButton.click();
+    }
+}
+```
+
+В Selenium <b>PageFactory.initElements</b> - это метод, предоставляемый классом PageFactory, который используется для инициализации WebElement'ов, определенных внутри класса Page Object. Этот метод, по сути, связывает аннотированные поля WebElement в Page Object классе с фактическими элементами на веб-странице.
+
+
 # <a name="eventfiringwebdriver"></a>
 ### * EventFiringWebDriver
 
