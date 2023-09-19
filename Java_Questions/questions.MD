@@ -38,6 +38,7 @@
     * [SELENIUM, SELENIDE](#selenium)
       * [SELECTORS](#selectors)
       * [SELENIUM WAITERS](#selenium_waiters)
+      * [SELENIUM SELECT CLASS](#selenium_select_class)
       * [SELENIUM PAGE OBJECT PATTERN](#selenium_page_object)
       * [EventFiringWebDriver](#eventfiringwebdriver)
 * [MAVEN](#maven_introduction)
@@ -5539,7 +5540,7 @@ FluentWait — это функция Selenium WebDriver, которая позв
         WebElement message = fluentWait.until(ExpectedConditions.presenceOfElementLocated(By.id("message")));
         Assertions.assertEquals("Received message: selected 20", message.getText());
 
-
+# <a name="selenium_select_class"></a>
 ### * Select class для работы с выпадающим меню
 <br>
 Класс Select в Selenium на Java используется для работы с выпадающими меню (также известными как элементы <b>select</b>) и выполнения различных операций с ними, таких как выбор опций, снятие выбора опций и получение выбранных опций. Класс Select предоставляет удобный способ взаимодействия с выпадающими списками и является частью библиотеки Selenium WebDriver.
