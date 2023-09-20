@@ -5489,7 +5489,6 @@ Cucumber - это BDD FrameWork, который использует легко-
 * By.Name
 * By.XPath
 
-
 #### Популярные экшены:
 * SendKeys
 * Submit
@@ -5497,7 +5496,6 @@ Cucumber - это BDD FrameWork, который использует легко-
 * dragAndDrop
 * KeyDown
 * MoveToElement
-
 
 #### Как перейти к элементу (сфокусироваться на элемент):
 
@@ -5523,6 +5521,26 @@ Cucumber - это BDD FrameWork, который использует легко-
     ((JavascriptExecutor) driver).executeScript() 
     ((JavascriptExecutor) driver).executeAsyncScript() 
 
+#### Как загрузить файл через Selenium
+
+Загрузить файл достаточно просто. Нужно найти с помощью селектора тэг <b>input</b> и далее вызвать команду <b>sendKeys()</b>
+
+Пример:
+
+``` java 
+
+    // Find the file input element by its HTML attribute (e.g., id or name)
+    WebElement fileInput = driver.findElement(By.id("fileUpload"));
+
+    // Specify the path to the file you want to upload
+    String filePath = "path/to/your/file.txt";
+    fileInput.sendKeys(filePath);
+
+    // Submit the form or take any necessary actions to trigger the file upload
+    WebElement uploadButton = driver.findElement(By.id("uploadButton"));
+    uploadButton.click();
+
+```
 
 # <a name="selectors"></a>
 ### * CSS SELECTORS: 
@@ -5569,7 +5587,6 @@ Explicit - ждем пока какое-то условие не станет и
 
     WebDriverWait wait = new WebDriverWait(driver, 10);
     WebElement autocompleteResult = wait.until(ExpectedConditions.visibilityOfElementLocated(By.className("pac-item")));
-
 
 #### * Также существует еще <b>FluentWait</b><br>
 FluentWait — это функция Selenium WebDriver, которая позволяет указать максимальное время ожидания выполнения определенного условия, а также частоту проверки этого условия. Он обеспечивает более гибкий и быстрый способ ожидания элементов или условий по сравнению с традиционным ожиданием. 
@@ -5630,7 +5647,6 @@ FluentWait — это функция Selenium WebDriver, которая позв
 * <b>Constructor</b>: Typically, you'll have a constructor in the Page Object class that initializes the WebDriver and ensures you're on the correct page. This constructor is often used to enforce that the Page Object represents a specific page or component.
 
 Usage in Tests: In your test scripts, you create instances of the Page Object classes and use the methods provided by those classes to interact with the web elements and perform actions.
-
 
 ### * Аннотации в Selenium Page Object
 
@@ -5713,9 +5729,7 @@ public class LoginPage {
     }
 }
 ```
-
 В Selenium <b>PageFactory.initElements</b> - это метод, предоставляемый классом PageFactory, который используется для инициализации WebElement'ов, определенных внутри класса Page Object. Этот метод, по сути, связывает аннотированные поля WebElement в Page Object классе с фактическими элементами на веб-странице.
-
 
 # <a name="eventfiringwebdriver"></a>
 ### * EventFiringWebDriver
@@ -5723,7 +5737,6 @@ public class LoginPage {
 EventFiringWebDriver в Selenium - это обертка вокруг обычного WebDriver, которая позволяет добавлять пользовательские обработчики событий для автоматического выполнения дополнительных действий во время выполнения тестов. Это полезно, когда вы хотите отслеживать и регистрировать события, такие как клики на элементы, загрузка страниц, ошибки и другие, для более подробного анализа выполнения тестов.
 
 <b>Практический пример</b> - делать скриншоты в процессе выполнения тестовых шагов. 
-
 
 Пример:
 
