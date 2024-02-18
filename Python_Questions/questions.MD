@@ -1,6 +1,7 @@
 <h0><b>НАВИГАЦИЯ</b></h0><br><br>
 
 * [COMMON QUESTIONS](#common_questions)
+    * [PANDAS SNIPPETS](#pandas)
 
 ---
 
@@ -11,6 +12,19 @@
 <a href=https://kirill-sklyarenko.ru/lenta/150-voprosov-na-sobesedovanie-python-bez-opyta>2) Вторая ссылка</a>
 <br>
 <a href=https://habr.com/ru/post/439576/>3) Третья ссылка</a>
+
+
+# <a name="pandas"></a>
+--- 
+<h2>* Pandas merge operation</h2>
+
+Можно обьединить таблицы (аналогично команде JOIN в SQL) в pandas с помощью команды merge
+
+Пример:
+
+    df = customers.merge(orders, left_on='id', right_on='customerId', how='left')
+
+
 
 ---
 <h2>* Flask snippets</h2>
