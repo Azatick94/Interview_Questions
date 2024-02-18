@@ -13,6 +13,35 @@
 <a href=https://habr.com/ru/post/439576/>3) Третья ссылка</a>
 
 ---
+<h2>* Flask snippets</h2>
+
+Flask-smorest, <b>abort</b> function is used to create responses (with automated documentation generation)
+
+For example: 
+
+    abort(404, message="Store not found.")
+
+
+---
+<h2>* Conda dependency/environment management (snippets)</h2>
+
+* https://docs.conda.io/en/latest/
+
+## Example of creating env, exporting packages into file and create new env from this file
+conda create --name myenv
+conda activate myenv
+
+conda install pip
+conda install flask
+conda install flask-smorest
+pip install python-dotenv
+
+conda env export --no-builds > environment.yml
+conda env create -f environment.yml -n newenv
+conda activate newenv
+
+
+---
 <h2>* Is it possible to access element by index in <b>set</b></h2>
 
 Вы не можете получить доступ к отдельным элементам set-a по их индексу в Python.
@@ -44,6 +73,10 @@ Set в Python представляет собой неупорядоченную
 * @staticmethod - метод становится статичным
 * @classmethod - поход на статичным метод, но отличие в том, что первым аргументом принимает сам Класс.
 * @property - превращает метод класс в атрибут.
+
+--- 
+<h2>* Python Errors Hierarchy</h2>
+
 
 ---
 <h2>* Memory Managements</h2>
