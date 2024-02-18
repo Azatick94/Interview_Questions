@@ -28,18 +28,20 @@ For example:
 * https://docs.conda.io/en/latest/
 
 ## Example of creating env, exporting packages into file and create new env from this file
-conda create --name myenv
-conda activate myenv
 
-conda install pip
-conda install flask
-conda install flask-smorest
-pip install python-dotenv
+  
+    conda create --name myenv
+    conda activate myenv
 
-conda env export --no-builds > environment.yml
-conda env create -f environment.yml -n newenv
-conda activate newenv
+    conda install pip
+    conda install flask
+    conda install flask-smorest
+    pip install python-dotenv
 
+    conda env export --no-builds > environment.yml
+    conda env create -f environment.yml -n newenv
+    conda activate newenv
+    
 
 ---
 <h2>* Is it possible to access element by index in <b>set</b></h2>
